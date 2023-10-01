@@ -1,0 +1,1 @@
+"D:\Program Files\Java\jre1.8.0_271\bin\keytool.exe" -genkey -v -keystore my-release-key.keystore -alias shsa -keyalg RSA -keysize 2048 -validity 10000

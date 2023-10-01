@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://jcsei2r0ivli"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ofyg4"]
+size = Vector3(3, 0.1, 3)
+
+[node name="Preview" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0819499, 0)
+mesh = SubResource("BoxMesh_ofyg4")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)

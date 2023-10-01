@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cso2sig8m0lwg"]
+
+[ext_resource type="ArrayMesh" uid="uid://c34g5kplpgxob" path="res://assets/cube.obj" id="1_0ua8j"]
+[ext_resource type="Script" path="res://assets/cube.gd" id="1_7ohiy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wbxs"]
+albedo_color = Color(0.0392157, 0.211765, 1, 1)
+
+[node name="Cube" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_7ohiy")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.297867, 0)
+mesh = ExtResource("1_0ua8j")
+surface_material_override/0 = SubResource("StandardMaterial3D_8wbxs")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://4muwshb4g4i6"]
+
+[ext_resource type="Script" path="res://board.gd" id="1_1wwet"]
+[ext_resource type="PackedScene" uid="uid://cso2sig8m0lwg" path="res://assets/cube.tscn" id="2_nkfwr"]
+[ext_resource type="Texture2D" uid="uid://du8lgle2bflad" path="res://assets/border.png" id="3_fst7i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4lard"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhd6n"]
+albedo_texture = ExtResource("3_fst7i")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7fqq2"]
+material = SubResource("StandardMaterial3D_fhd6n")
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5a2y"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("3_fst7i")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dx6j1"]
+material = SubResource("StandardMaterial3D_m5a2y")
+size = Vector2(3, 3)
+
+[node name="Board" type="Node3D"]
+script = ExtResource("1_1wwet")
+block = ExtResource("2_nkfwr")
+
+[node name="Main" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0819499, 0)
+mesh = SubResource("BoxMesh_4lard")
+
+[node name="Preview" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.082, 6.5)
+mesh = SubResource("BoxMesh_7fqq2")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -4.5)
+
+[node name="Active" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779459, 0)
+
+[node name="Layer" type="MeshInstance3D" parent="Active"]
+mesh = SubResource("PlaneMesh_dx6j1")
+skeleton = NodePath("../..")
