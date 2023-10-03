@@ -77,12 +77,14 @@ void fragment() {
 		if (UV.y < border_size.z) {
 			// top
 			if (UV.x < (1.0 - border_size.z)) {
+				base_uv.y = base_uv.y / border_size.z;
 				base_uv.x = phase + UV.x * border_size.x;
 			}
 		}
 		if ((1.0 - UV.y) < border_size.z) {
 			// bottom
 			if (UV.x > border_size.z) {
+				base_uv.y = (1.0 - base_uv.y) / border_size.z;
 				base_uv.x = phase - UV.x * border_size.x;
 			}
 		}

@@ -16,5 +16,5 @@ transform = Transform3D(1, 0, 0, 0, 0.151985, 0.988383, 0, -0.988383, 0.151985, 
 transform = Transform3D(1, 0, 0, 0, 0.717336, 0.696727, 0, -0.696727, 0.717336, 0, 2.68087, 2.32742)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.75495, 0, 0, 0, 0.729314, 0, 0, 0, 2.18135, 0, 0, 0)
+transform = Transform3D(2.68913, 0, 0, 0, 0.729314, 0, 0, 0, 2.18135, 0, 0, 0)
 mesh = SubResource("PlaneMesh_1mgd4")
