@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://clyc21blhditv"]
+
+[ext_resource type="Material" uid="uid://da4h8qtamaesf" path="res://transparent.tres" id="1_i8p6s"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1mgd4"]
+lightmap_size_hint = Vector2i(12, 12)
+material = ExtResource("1_i8p6s")
+size = Vector2(3, 3)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.151985, 0.988383, 0, -0.988383, 0.151985, 0, 1.09423, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.717336, 0.696727, 0, -0.696727, 0.717336, 0, 2.68087, 2.32742)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.75495, 0, 0, 0, 0.729314, 0, 0, 0, 2.18135, 0, 0, 0)
+mesh = SubResource("PlaneMesh_1mgd4")
