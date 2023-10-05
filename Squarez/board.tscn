@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://4muwshb4g4i6"]
+[gd_scene load_steps=10 format=3 uid="uid://4muwshb4g4i6"]
 
 [ext_resource type="Script" path="res://board.gd" id="1_1wwet"]
 [ext_resource type="PackedScene" uid="uid://cso2sig8m0lwg" path="res://assets/cube.tscn" id="2_nkfwr"]
 [ext_resource type="Texture2D" uid="uid://du8lgle2bflad" path="res://assets/border.png" id="3_fst7i"]
+[ext_resource type="Shader" path="res://assets/shaders/doted_border_simple.gdshader" id="4_45154"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lard"]
 size = Vector3(10, 0.1, 10)
@@ -14,14 +15,18 @@ albedo_texture = ExtResource("3_fst7i")
 material = SubResource("StandardMaterial3D_fhd6n")
 size = Vector3(3, 0.1, 3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5a2y"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-albedo_texture = ExtResource("3_fst7i")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hu2qr"]
+render_priority = 0
+shader = ExtResource("4_45154")
+shader_parameter/color = Color(0, 0, 0, 0.5)
+shader_parameter/size = Vector2(1000, 1000)
+shader_parameter/border_width = 10.0
+shader_parameter/dot_length = 30.0
+shader_parameter/dot_interval = 30.0
+shader_parameter/speed = 50.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dx6j1"]
-material = SubResource("StandardMaterial3D_m5a2y")
+material = SubResource("ShaderMaterial_hu2qr")
 size = Vector2(3, 3)
 
 [node name="Board" type="Node3D"]
@@ -43,5 +48,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -4.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779459, 0)
 
 [node name="Layer" type="MeshInstance3D" parent="Active"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 1, 0, 1)
 mesh = SubResource("PlaneMesh_dx6j1")
 skeleton = NodePath("../..")
+
+[node name="Pivot" type="Node3D" parent="Active"]
+
+[node name="Cube" parent="Active/Pivot" instance=ExtResource("2_nkfwr")]
+
+[node name="Cube2" parent="Active/Pivot" instance=ExtResource("2_nkfwr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 2)

@@ -24,7 +24,7 @@ func _ready():
 			item.position.x = x
 			item.position.z = y
 			item.color = Color(0, 0, 1)
-			$Active.add_child(item)
+			$Active/Pivot.add_child(item)
 	
 	spawn_preview.emit()
 

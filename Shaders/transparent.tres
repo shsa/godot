@@ -1,13 +1,13 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://da4h8qtamaesf"]
 
-[ext_resource type="Shader" path="res://doted_border.gdshader" id="1_dt31y"]
+[ext_resource type="Shader" path="res://doted_border_simple.gdshader" id="1_bqhql"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_dt31y")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/size = Vector2(1, 1)
-shader_parameter/border_width = 0.012
-shader_parameter/dot_length = 0.11
-shader_parameter/dot_interval = 0.075
-shader_parameter/speed = 0.105
+shader = ExtResource("1_bqhql")
+shader_parameter/color = Color(1, 1, 0, 1)
+shader_parameter/size = Vector2(1, 0.825)
+shader_parameter/border_width = 0.002
+shader_parameter/dot_length = 0.035
+shader_parameter/dot_interval = 0.03
+shader_parameter/speed = -0.225
