@@ -1,21 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://da4h8qtamaesf"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://da4h8qtamaesf"]
 
-[ext_resource type="Shader" path="res://border2.gdshader" id="1_kw6ch"]
-[ext_resource type="Texture2D" uid="uid://ccsdfc5mwxa0l" path="res://border2.png" id="2_jytn8"]
+[ext_resource type="Shader" path="res://doted_border.gdshader" id="1_dt31y"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_kw6ch")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_scale = Vector3(1, 1, 0)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/border_size = Vector3(5, 5, 0.05)
-shader_parameter/speed = 0.315
-shader_parameter/texture_albedo = ExtResource("2_jytn8")
+shader = ExtResource("1_dt31y")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/size = Vector2(1, 1)
+shader_parameter/border_width = 0.012
+shader_parameter/dot_length = 0.11
+shader_parameter/dot_interval = 0.075
+shader_parameter/speed = 0.105
