@@ -1,12 +1,9 @@
-extends Node3D
+extends BoardInput
 
 @export var block: PackedScene
 @export var data: Data
 
 signal spawn_preview
-signal start_move_figure
-signal move_figure(delta: Vector2)
-signal rotate_figure
 
 func _ready():
 	var a = Test_class.new()
@@ -31,64 +28,35 @@ func _ready():
 	
 	spawn_preview.emit()
 	
-	connect("start_move_figure", _start_move_figure)
-	connect("move_figure", _move_figure)
-	connect("rotate_figure", _rotate_figure)
+	connect("active_start_move", _active_start_move)
+	connect("active_move", _active_move)
+	connect("active_rotate", _active_rotate)
+	connect("click_preview", _click_preview)
 
 var _start_figure_position = Vector3.ZERO
 
-func _start_move_figure():
+func _active_start_move():
 	_start_figure_position = $Active.position
 
-func _move_figure(delta: Vector2):
+func _active_move(delta: Vector2):
 	$Active.position = _start_figure_position + Vector3(delta.x, 0.0, delta.y)
-	
-func _rotate_figure():
+
+var	_active_rotating = false
+func _active_rotate():
+	if _active_rotating: return
+		
+	_active_rotating = true
 	var tween = $Active.create_tween()
 	var rot = $Active.rotation + Vector3(0.0, -PI / 2, 0.0)
-	tween.tween_property($Active, "rotation", rot, 1.0).connect("finished", _figure_rotated)
+	tween.tween_property($Active, "rotation", rot, 0.5).connect("finished", _active_rotated)
 	#$Active.rotate(Vector3.UP, PI / 2.0)
 
-func _figure_rotated():
-	print("ok")
-	pass
+func _active_rotated():
+	_active_rotating = false
+	
+func _click_preview():
+	print("preview")
 
-
-var timer = 0
-func _process(delta):
-	timer += delta
-	pass
-
-var touch_pressed = false
-var touch_start_time = 0.0
-var touch_start_position = Vector2.ZERO
-var click_delta = 0.5
-
-func _screen_to_board(screen_position: Vector2) -> Vector2:
-	var viewport = get_viewport()
-	var camera = get_viewport().get_camera_3d()
-	var world_position = camera.project_position(screen_position, 100.0)
-	world_position = to_local(world_position)
-	return Vector2(world_position.x, world_position.z)
-
-func _input(event):
-	if event is InputEventMouseMotion:
-		if touch_pressed:
-			move_figure.emit(_screen_to_board(event.position) - _screen_to_board(touch_start_position))
-			#move_figure.emit(_screen_to_board(event.position))
-	if event is InputEventMouseButton:
-		if event.pressed:
-			touch_start_time = timer
-			touch_start_position = event.position
-			touch_pressed = true
-			start_move_figure.emit()
-		else:
-			touch_pressed = false
-			if (timer - touch_start_time) < click_delta:
-				var move_delta = (event.position - touch_start_position).length()
-				if move_delta < 1.0:
-					rotate_figure.emit()
-		
 #		var viewport = get_viewport()
 #		var mouse_position = viewport.get_mouse_position()
 #		var camera = get_viewport().get_camera_3d()

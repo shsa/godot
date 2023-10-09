@@ -57,11 +57,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -4.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779459, 0)
 
 [node name="Layer" type="MeshInstance3D" parent="Active"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 1, 0, 1)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_dx6j1")
 skeleton = NodePath("../..")
 
 [node name="Pivot" type="Node3D" parent="Active"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 
 [node name="Cube" parent="Active/Pivot" instance=ExtResource("2_nkfwr")]
 
