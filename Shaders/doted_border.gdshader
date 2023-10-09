@@ -2,9 +2,9 @@ shader_type spatial;
 
 uniform vec3 color : source_color = vec3(0.0, 0.0, 0.0);
 uniform vec2 size = vec2(1.0, 1.0);
-uniform float border_width : hint_range(0.0, 0.5) = 0.05;
-uniform float dot_length : hint_range(0.0, 4.0) = 0.1;
-uniform float dot_interval: hint_range(0.0, 4.0) = 0.2;
+uniform float border_width = 0.05;
+uniform float dot_length = 0.1;
+uniform float dot_interval = 0.2;
 //uniform float phase;
 uniform float speed = 1.0; // Controls the rotation
 
@@ -16,8 +16,8 @@ bool isDot(float _pos) {
 
 void fragment() {
 	vec2 uv = UV * size;
-	float phase = TIME * speed;
-	//float phase = speed;
+	//float phase = TIME * speed;
+	float phase = speed;
 	float alpha = 0.0;
 	float _path = 0.0;
 	float _offset = 0.0;
@@ -28,15 +28,20 @@ void fragment() {
 		// top
 		if (uv.x < border_width) {
 			// top-left corner
-			bool _top = isDot(uv.x - phase);
+			bool _top = isDot(border_width - phase);
 			if (_top)
 			{
-				alpha = 1.0;
-			}
-			float _path = size.x + size.y + size.x - 3.0 * border_width;
-			bool _left = isDot(_path + (1.0 - uv.y) - phase);
-			if (_left) {
-				alpha = 1.0;
+				_top = isDot(uv.x - phase);
+				if (_top)
+				{
+					alpha = 1.0;
+				}
+			} else {
+				float _path = size.x + size.y + size.x - 3.0 * border_width;
+				bool _left = isDot(_path + b(border_width - uv.y) - phase);
+				if (_left) {
+					alpha = 1.0;
+				}
 			}
 		} else if ((1.0 - uv.x) < border_width) {
 			// top-right cordern
@@ -55,6 +60,7 @@ void fragment() {
 			// top-middle
 			if (isDot(uv.x - phase)) {
 				alpha = 1.0;
+				_color = vec3(0.0, 1.0, 0.0);
 			}
 		}
 	} else if ((size.x - uv.x) < border_width) {
