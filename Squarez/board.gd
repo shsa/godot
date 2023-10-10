@@ -1,6 +1,7 @@
 extends BoardInput
 
 @export var block: PackedScene
+@export var cell: PackedScene
 @export var data: Data
 
 signal spawn_preview
@@ -10,13 +11,20 @@ func _ready():
 	a.test()
 	print(data.data)
 	
-#	for x in range(10):
-#		for y in range(10):
-#			var item = block.instantiate() as Node3D
-#			item.position.x = x
-#			item.position.z = y
-#			item.color = Color(0, 0, 1)
-#			$Pivot.add_child(item)
+	for x in range(10):
+		for y in range(10):
+			var item = cell.instantiate() as Node3D
+			item.position.x = x
+			item.position.z = y
+			$Pivot.add_child(item)
+	
+	for x in range(10):
+		for y in range(14):
+			if randi_range(0, 10) < 4:
+				var item = block.instantiate() as Node3D
+				item.position.x = x
+				item.position.z = y
+				$Pivot.add_child(item)
 
 	for x in range(3):
 		for y in range(3):

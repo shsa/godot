@@ -45,16 +45,18 @@ func _input(event):
 			active_move.emit(_screen_to_local(event.position) - _screen_to_local(touch_start_position))
 	if event is InputEventMouseButton:
 		if event.pressed:
-			touch_start_time = timer
-			touch_start_position = event.position
-			touch_pressed = true
-			active_start_move.emit()
+			if event.button_index == 1:
+				touch_pressed = true
+				touch_start_time = timer
+				touch_start_position = event.position
+				active_start_move.emit()
 		else:
-			touch_pressed = false
-			if (timer - touch_start_time) < click_delta:
-				var move_delta = (event.position - touch_start_position).length()
-				if move_delta < 1.0:
-					if _check_touch(event.position, _preview):
-						click_preview.emit()
-					else:
-						active_rotate.emit()
+			if event.button_index == 1:
+				touch_pressed = false
+				if (timer - touch_start_time) < click_delta:
+					var move_delta = (event.position - touch_start_position).length()
+					if move_delta < 1.0:
+						if _check_touch(event.position, _preview):
+							click_preview.emit()
+						else:
+							active_rotate.emit()

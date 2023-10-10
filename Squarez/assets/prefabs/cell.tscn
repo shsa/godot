@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5il45b8ys5gp"]
+
+[ext_resource type="ArrayMesh" uid="uid://c3bimhta1bpt1" path="res://assets/models/cell.obj" id="1_0hdro"]
+[ext_resource type="Material" uid="uid://ddxedsyo8rikv" path="res://assets/materials/cell_material.tres" id="2_n2jm4"]
+[ext_resource type="Texture2D" uid="uid://c5nsayq35ctcx" path="res://assets/textures/cell_background.png" id="3_mv4gl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5e1o"]
+albedo_texture = ExtResource("3_mv4gl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2igw6"]
+material = SubResource("StandardMaterial3D_b5e1o")
+
+[node name="cell" type="Node3D"]
+
+[node name="Cell" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+mesh = ExtResource("1_0hdro")
+surface_material_override/0 = ExtResource("2_n2jm4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("PlaneMesh_2igw6")
+skeleton = NodePath("../Cell")
