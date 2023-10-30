@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://4muwshb4g4i6"]
 
 [ext_resource type="Script" path="res://board.gd" id="1_1wwet"]
-[ext_resource type="PackedScene" uid="uid://cso2sig8m0lwg" path="res://assets/cube.tscn" id="2_nkfwr"]
+[ext_resource type="PackedScene" uid="uid://dimp06oxxkkl4" path="res://assets/prefabs/cube.tscn" id="2_nkfwr"]
 [ext_resource type="Texture2D" uid="uid://du8lgle2bflad" path="res://assets/border.png" id="3_fst7i"]
 [ext_resource type="PackedScene" uid="uid://c5il45b8ys5gp" path="res://assets/prefabs/cell.tscn" id="3_ni0pu"]
 [ext_resource type="Shader" path="res://assets/shaders/doted_border_simple.gdshader" id="4_45154"]
@@ -70,6 +70,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 
 [node name="Cube" parent="Active/Pivot" instance=ExtResource("2_nkfwr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.472966, 0, -0.544113)
 
 [node name="Cube2" parent="Active/Pivot" instance=ExtResource("2_nkfwr")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 2)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.31439, 0, 2.3996)
+highlight = true

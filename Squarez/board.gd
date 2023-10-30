@@ -11,12 +11,12 @@ func _ready():
 	a.test()
 	print(data.data)
 	
-	for x in range(10):
-		for y in range(10):
-			var item = cell.instantiate() as Node3D
-			item.position.x = x
-			item.position.z = y
-			$Pivot.add_child(item)
+#	for x in range(10):
+#		for y in range(10):
+#			var item = cell.instantiate() as Node3D
+#			item.position.x = x
+#			item.position.z = y
+#			$Pivot.add_child(item)
 	
 	for x in range(10):
 		for y in range(14):
@@ -24,6 +24,8 @@ func _ready():
 				var item = block.instantiate() as Node3D
 				item.position.x = x
 				item.position.z = y
+				item.color = Color(0, 0, 1)
+				item.highlight = false
 				$Pivot.add_child(item)
 
 	for x in range(3):
@@ -31,7 +33,8 @@ func _ready():
 			var item = block.instantiate() as Node3D
 			item.position.x = x
 			item.position.z = y
-			item.color = Color(0, 0, 1)
+			item.color = Color(0, 1, 0)
+			item.highlight = true
 			$Active/Pivot.add_child(item)
 	
 	spawn_preview.emit()
