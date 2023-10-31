@@ -7,6 +7,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/doted_border_simple.gdshader" id="4_45154"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lard"]
+custom_aabb = AABB(0, 0, 0, 1, 0, 0)
 size = Vector3(10, 0.1, 14)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhd6n"]
@@ -55,23 +56,29 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Preview"]
 shape = SubResource("BoxShape3D_grset")
 
+[node name="Pivot" type="Node3D" parent="Preview"]
+
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -6.5)
 
-[node name="Active" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779459, 0)
+[node name="Cube" parent="Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
 
-[node name="Layer" type="MeshInstance3D" parent="Active"]
+[node name="Active" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.779, 1)
+
+[node name="Layer" type="MeshInstance3D" parent="Pivot/Active"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_dx6j1")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="Pivot" type="Node3D" parent="Active"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+[node name="Pivot" type="Node3D" parent="Pivot/Active"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Cube" parent="Active/Pivot" instance=ExtResource("2_nkfwr")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.472966, 0, -0.544113)
-
-[node name="Cube2" parent="Active/Pivot" instance=ExtResource("2_nkfwr")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.31439, 0, 2.3996)
+[node name="Cube" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 0, -1)
 highlight = true
+
+[node name="Cube2" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
+
+[node name="Cube3" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 1)

@@ -3,6 +3,7 @@ extends Node3D
 class_name BoardInput
 
 signal active_start_move
+signal active_end_move
 signal active_move(delta: Vector2)
 signal active_rotate
 signal click_preview
@@ -60,3 +61,4 @@ func _input(event):
 							click_preview.emit()
 						else:
 							active_rotate.emit()
+				active_end_move.emit()

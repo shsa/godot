@@ -19,14 +19,24 @@ func __set_highlight(value):
 	else:
 		material.emission_enabled = false	
 			
+func __set_highlight2(value):
+	highlight = value
+	var material = $Cube.get_surface_override_material(0)
+	var next_pass = material.next_pass
+	if value:
+		next_pass.set_shader_parameter("strength", 0.2)
+	else:
+		next_pass.set_shader_parameter("strength", 0.0)
+
+func update():
+	__set_color(color)
+	__set_highlight2(highlight)
+			
 func _ready():
 	var material = $Cube.get_surface_override_material(0)
 	var new_material = material.duplicate()
-	#new_material.emission_enabled = false
-#	new_material.next_pass = new_material.next_pass.duplicate()
-#	new_material.next_pass.shader = new_material.next_pass.shader.duplicate()
+	new_material.next_pass = new_material.next_pass.duplicate()
+	new_material.next_pass.shader = new_material.next_pass.shader.duplicate()
 	$Cube.set_surface_override_material(0, new_material)
-	__set_color(color)
-	__set_highlight(highlight)
-	pass
+	update()
 	
