@@ -1,24 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://4muwshb4g4i6"]
+[gd_scene load_steps=16 format=3 uid="uid://4muwshb4g4i6"]
 
-[ext_resource type="Script" path="res://board.gd" id="1_1wwet"]
+[ext_resource type="Script" path="res://assets/scripts/boards/board_main.gd" id="1_s4as1"]
 [ext_resource type="PackedScene" uid="uid://dimp06oxxkkl4" path="res://assets/prefabs/cube.tscn" id="2_nkfwr"]
+[ext_resource type="Script" path="res://assets/scripts/boards/board_preview.gd" id="3_04scc"]
 [ext_resource type="Texture2D" uid="uid://du8lgle2bflad" path="res://assets/border.png" id="3_fst7i"]
-[ext_resource type="PackedScene" uid="uid://c5il45b8ys5gp" path="res://assets/prefabs/cell.tscn" id="3_ni0pu"]
 [ext_resource type="Shader" path="res://assets/shaders/doted_border_simple.gdshader" id="4_45154"]
+[ext_resource type="Script" path="res://assets/scripts/boards/board_active.gd" id="4_fy5hx"]
+[ext_resource type="Script" path="res://assets/scripts/boards/board_input.gd" id="7_c1ato"]
+[ext_resource type="Script" path="res://assets/scripts/boards/board_logic.gd" id="8_k868v"]
+[ext_resource type="Script" path="res://assets/scripts/data/data.gd" id="9_8irmo"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lard"]
 custom_aabb = AABB(0, 0, 0, 1, 0, 0)
 size = Vector3(10, 0.1, 14)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhd6n"]
-albedo_texture = ExtResource("3_fst7i")
-
-[sub_resource type="BoxMesh" id="BoxMesh_7fqq2"]
-material = SubResource("StandardMaterial3D_fhd6n")
-size = Vector3(3, 0.1, 3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_grset"]
-size = Vector3(3, 1, 3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hu2qr"]
 render_priority = 0
@@ -34,10 +28,18 @@ shader_parameter/speed = 50.0
 material = SubResource("ShaderMaterial_hu2qr")
 size = Vector2(3, 3)
 
-[node name="Board" type="Node3D"]
-script = ExtResource("1_1wwet")
-block = ExtResource("2_nkfwr")
-cell = ExtResource("3_ni0pu")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhd6n"]
+albedo_texture = ExtResource("3_fst7i")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7fqq2"]
+material = SubResource("StandardMaterial3D_fhd6n")
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_grset"]
+size = Vector3(3, 1, 3)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_s4as1")
 
 [node name="Main" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.082, 0)
@@ -46,33 +48,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.082, 0)
 mesh = SubResource("BoxMesh_4lard")
 skeleton = NodePath("../..")
 
-[node name="Preview" type="Area3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.90945, -0.082, 7.82248)
-
-[node name="Mesh" type="MeshInstance3D" parent="Preview"]
-mesh = SubResource("BoxMesh_7fqq2")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Preview"]
-shape = SubResource("BoxShape3D_grset")
-
-[node name="Pivot" type="Node3D" parent="Preview"]
-
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -6.5)
 
 [node name="Cube" parent="Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
 
-[node name="Active" type="Node3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.779, 1)
+[node name="Active" type="Node3D" parent="Pivot" node_paths=PackedStringArray("main", "preview", "input")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.779, 13.419)
+script = ExtResource("4_fy5hx")
+main = NodePath("../..")
+preview = NodePath("../Preview")
+input = NodePath("../../Input")
 
 [node name="Layer" type="MeshInstance3D" parent="Pivot/Active"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0.113857)
 mesh = SubResource("PlaneMesh_dx6j1")
 skeleton = NodePath("../../..")
 
 [node name="Pivot" type="Node3D" parent="Pivot/Active"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Cube" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 0, -1)
@@ -82,3 +75,36 @@ highlight = true
 
 [node name="Cube3" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 1)
+
+[node name="Preview" type="Area3D" parent="Pivot" node_paths=PackedStringArray("main", "input")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.59055, -0.082, 14.3225)
+script = ExtResource("3_04scc")
+main = NodePath("../..")
+input = NodePath("../../Input")
+
+[node name="Mesh" type="MeshInstance3D" parent="Pivot/Preview"]
+mesh = SubResource("BoxMesh_7fqq2")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Preview"]
+shape = SubResource("BoxShape3D_grset")
+
+[node name="Pivot" type="Node3D" parent="Pivot/Preview"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+
+[node name="Input" type="Node3D" parent="." node_paths=PackedStringArray("board_preview")]
+script = ExtResource("7_c1ato")
+board_preview = NodePath("../Pivot/Preview")
+
+[node name="Data" type="Node" parent="."]
+script = ExtResource("9_8irmo")
+
+[node name="Logic" type="Node" parent="." node_paths=PackedStringArray("data", "main", "active", "preview", "input")]
+script = ExtResource("8_k868v")
+data = NodePath("../Data")
+main = NodePath("..")
+active = NodePath("../Pivot/Active")
+preview = NodePath("../Pivot/Preview")
+input = NodePath("../Input")
+collection_name = "test"
+cube_simple = ExtResource("2_nkfwr")

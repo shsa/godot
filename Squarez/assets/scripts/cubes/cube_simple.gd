@@ -1,15 +1,15 @@
-extends Node3D
+extends CubeBase
 
 @export var color: Color = Color(0, 1, 0)
 
 @export var highlight: bool = false
 
-func __set_color(value):
+func set_color(value):
 	color = value
 	var material = $Cube.get_surface_override_material(0)
 	material.albedo_color = value	
 
-func __set_highlight(value):
+func _set_highlight0(value):
 	highlight = value
 	var material = $Cube.get_surface_override_material(0)
 	if value:
@@ -19,7 +19,7 @@ func __set_highlight(value):
 	else:
 		material.emission_enabled = false	
 			
-func __set_highlight2(value):
+func set_highlight(value):
 	highlight = value
 	var material = $Cube.get_surface_override_material(0)
 	var next_pass = material.next_pass
@@ -29,8 +29,8 @@ func __set_highlight2(value):
 		next_pass.set_shader_parameter("strength", 0.0)
 
 func update():
-	__set_color(color)
-	__set_highlight2(highlight)
+	set_color(color)
+	set_highlight(highlight)
 			
 func _ready():
 	var material = $Cube.get_surface_override_material(0)
