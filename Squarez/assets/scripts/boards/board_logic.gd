@@ -34,17 +34,20 @@ func _can_apply() -> bool:
 			_errors.append(cube)
 		pass
 
+	if len(_errors) == 0: return true
+	
 	var jobs := Jobs.new()
-	if len(_errors) > 0:
-		for cube in _errors:
-			var error = cube_error.instantiate()
-			error.position = cube.position
-			active._pivot.add_child(error)
-			jobs.add(error.play)
-			
-		await jobs.all()
-		return false
+	for cube in _errors:
+		var error = cube_error.instantiate()
+		error.position = cube.position
+		active._pivot.add_child(error)
+		jobs.add(error.play)
+		
+	await jobs.all()
+	return false
 
+func _apply():
+	var jobs := Jobs.new()
 	for cube in active.get_cubes():
 		active.remove_cube(cube)
 		main.add_cube(cube)
@@ -53,10 +56,12 @@ func _can_apply() -> bool:
 	await jobs.all()
 	return true
 
-func _try_new_preview():
+func _try_apply_preview():
 	if not (await _can_apply()):
 		return
 
+	await _apply()
+	
 	for cube in preview.get_cubes():
 		preview.remove_cube(cube)
 		active.add_cube(cube)
@@ -67,5 +72,5 @@ func _try_new_preview():
 
 func _click_preview():
 	active.lock()
-	await _try_new_preview()
+	await _try_apply_preview()
 	active.unlock()
