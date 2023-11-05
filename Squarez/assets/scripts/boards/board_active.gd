@@ -1,10 +1,13 @@
 extends BoardBase
 
+class_name BoardActive
+
 @export var main: BoardMain
 @export var preview: BoardBase
 @export var input: BoardInput
 
 var _start_figure_position = Vector3.ZERO
+var _locked := false
 
 func _ready():
 	board_name = "Active"
@@ -15,6 +18,12 @@ func _ready():
 	input.connect("active_end_move", _end_move)
 	input.connect("active_move", _move)
 	input.connect("active_rotate", _rotate)
+
+func lock():
+	_locked = true
+	
+func unlock():
+	_locked = false
 
 func add_cube(cube: CubeBase):
 	super.add_cube(cube)
@@ -34,7 +43,8 @@ func preview_position() -> Vector3:
 	return Vector3(1, position.y, 13.419)
 
 func start_from_preview():
-	var pos = preview_position()
+	var pos := preview_position()
+	_start_figure_position = pos
 	position = Vector3(preview.position.x, position.y, preview.position.z)
 	rotation = Vector3.ZERO
 	scale = preview.scale
@@ -45,6 +55,7 @@ func start_from_preview():
 
 
 func _start_move():
+	if _locked: return
 	_start_figure_position = position
 
 func _calc_delta() -> Vector3:
@@ -71,6 +82,8 @@ func _calc_delta() -> Vector3:
 	return delta
 
 func _end_move():
+	if _locked: return
+
 	var delta := _calc_delta()
 	var pos := position + delta
 	var tween := create_tween()
@@ -78,15 +91,16 @@ func _end_move():
 	pass
 
 func _move(delta: Vector2):
+	if _locked: return
+
 	position = _start_figure_position + Vector3(delta.x, 0.0, delta.y)
 
-var _rotating = false
 func _rotate():
-	if _rotating: return
+	if _locked: return
 		
-	_rotating = true
+	_locked = true
 	var tween = create_tween()
 	var rot = rotation + Vector3(0.0, -PI / 2, 0.0)
 	tween.tween_property(self, "rotation", rot, 0.5)
 	await tween.finished
-	_rotating = false
+	_locked = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://4muwshb4g4i6"]
+[gd_scene load_steps=17 format=3 uid="uid://4muwshb4g4i6"]
 
 [ext_resource type="Script" path="res://assets/scripts/boards/board_main.gd" id="1_s4as1"]
 [ext_resource type="PackedScene" uid="uid://dimp06oxxkkl4" path="res://assets/prefabs/cube.tscn" id="2_nkfwr"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://assets/scripts/boards/board_input.gd" id="7_c1ato"]
 [ext_resource type="Script" path="res://assets/scripts/boards/board_logic.gd" id="8_k868v"]
 [ext_resource type="Script" path="res://assets/scripts/data/data.gd" id="9_8irmo"]
+[ext_resource type="PackedScene" uid="uid://567jsb1cdvj0" path="res://assets/prefabs/cube_error.tscn" id="10_cuthu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lard"]
 custom_aabb = AABB(0, 0, 0, 1, 0, 0)
@@ -107,4 +108,5 @@ active = NodePath("../Pivot/Active")
 preview = NodePath("../Pivot/Preview")
 input = NodePath("../Input")
 collection_name = "test"
+cube_error = ExtResource("10_cuthu")
 cube_simple = ExtResource("2_nkfwr")

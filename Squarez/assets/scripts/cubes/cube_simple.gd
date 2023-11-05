@@ -42,5 +42,5 @@ func _ready():
 	
 func placed():
 	var tween := create_tween()
-	tween.tween_property(self, "rotation", Vector3(0.0, 2 * PI, 0.0), 1)
+	tween.tween_property(self, "rotation", Vector3(0.0, 2 * PI, 0.0), 0.1)
 	await tween.finished
