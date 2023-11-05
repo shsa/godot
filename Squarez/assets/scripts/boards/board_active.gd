@@ -47,7 +47,7 @@ func start_from_preview():
 func _start_move():
 	_start_figure_position = position
 
-func _calc_bounds() -> Rect2:
+func _calc_delta() -> Vector3:
 	var tl := Vector2(1000, 1000)
 	var br := Vector2(-1000, -1000)
 	for cube in super.get_cubes():
@@ -57,23 +57,22 @@ func _calc_bounds() -> Rect2:
 		tl.y = min(tl.y, pos.z)
 		br.x = max(br.x, pos.x)
 		br.y = max(br.y, pos.z)
-	print(tl, br)
-	return Rect2(tl, br - tl + Vector2.ONE)
+	
+	var delta := Vector3(round(position)) - position
+	if br.x > main.width:
+		delta.x = main.width - br.x - 1
+	if tl.x < 0:
+		delta.x = 0 - tl.x
+	if br.y > main.height:
+		delta.z = main.height - br.y - 1
+	if tl.y < 0:
+		delta.z = 0 - tl.y
+	
+	return delta
 
 func _end_move():
-	var bounds := _calc_bounds()
-	var delta := Vector3(round(position)) - position
-	if (bounds.position.x + bounds.size.x) > main.width:
-		delta.x = main.width - (bounds.position.x + bounds.size.x)
-	if bounds.position.x < 0:
-		delta.x = -bounds.position.x
-	if (bounds.position.y + bounds.size.y) > main.height:
-		delta.z = main.height - (bounds.position.y + bounds.size.y)
-	if bounds.position.y < 0:
-		delta.z = -bounds.position.y
-	
+	var delta := _calc_delta()
 	var pos := position + delta
-	print(bounds, delta, pos)
 	var tween := create_tween()
 	tween.tween_property(self, "position", pos, 0.1)
 	pass
@@ -81,7 +80,7 @@ func _end_move():
 func _move(delta: Vector2):
 	position = _start_figure_position + Vector3(delta.x, 0.0, delta.y)
 
-var	_rotating = false
+var _rotating = false
 func _rotate():
 	if _rotating: return
 		
