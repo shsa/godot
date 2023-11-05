@@ -47,9 +47,34 @@ func start_from_preview():
 func _start_move():
 	_start_figure_position = position
 
+func _calc_bounds() -> Rect2:
+	var tl := Vector2(1000, 1000)
+	var br := Vector2(-1000, -1000)
+	for cube in super.get_cubes():
+		var pos = _pivot.to_global(cube.position)
+		pos = main._pivot.to_local(pos)
+		tl.x = min(tl.x, pos.x)
+		tl.y = min(tl.y, pos.z)
+		br.x = max(br.x, pos.x)
+		br.y = max(br.y, pos.z)
+	print(tl, br)
+	return Rect2(tl, br - tl + Vector2.ONE)
+
 func _end_move():
-	var pos = round(position)
-	var tween = create_tween()
+	var bounds := _calc_bounds()
+	var delta := Vector3(round(position)) - position
+	if (bounds.position.x + bounds.size.x) > main.width:
+		delta.x = main.width - (bounds.position.x + bounds.size.x)
+	if bounds.position.x < 0:
+		delta.x = -bounds.position.x
+	if (bounds.position.y + bounds.size.y) > main.height:
+		delta.z = main.height - (bounds.position.y + bounds.size.y)
+	if bounds.position.y < 0:
+		delta.z = -bounds.position.y
+	
+	var pos := position + delta
+	print(bounds, delta, pos)
+	var tween := create_tween()
 	tween.tween_property(self, "position", pos, 0.1)
 	pass
 
@@ -63,8 +88,6 @@ func _rotate():
 	_rotating = true
 	var tween = create_tween()
 	var rot = rotation + Vector3(0.0, -PI / 2, 0.0)
-	tween.tween_property(self, "rotation", rot, 0.5).connect("finished", _rotated)
-	#$Active.rotate(Vector3.UP, PI / 2.0)
-
-func _rotated():
+	tween.tween_property(self, "rotation", rot, 0.5)
+	await tween.finished
 	_rotating = false

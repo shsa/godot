@@ -6,3 +6,8 @@ class_name CubeBase
 
 func set_highlight(value):
 	pass
+
+## Вызывается сразу после помещения квадрата на главную доску
+## для активации действий на размещение (взрыв и т.д.)
+func placed():
+	pass

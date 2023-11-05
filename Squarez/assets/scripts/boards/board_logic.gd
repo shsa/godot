@@ -32,14 +32,17 @@ func _can_apply() -> bool:
 			return false
 		pass
 
+	var jobs := Jobs.new()
 	for cube in active.get_cubes():
 		active.remove_cube(cube)
 		main.add_cube(cube)
 		cube.set_highlight(false)
+		jobs.add(cube.placed)
+	await jobs.all()
 	return true
 
 func _click_preview():
-	if not _can_apply():
+	if not (await _can_apply()):
 		return
 
 	for cube in preview.get_cubes():
