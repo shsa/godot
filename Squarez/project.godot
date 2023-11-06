@@ -35,7 +35,7 @@ ssss={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://locale/en.json", "res://locale/ru.json")
+locale/translations=PackedStringArray("res://locale/en.lang", "res://locale/ru.lang")
 locale/test="ru"
 
 [rendering]

@@ -11,6 +11,7 @@ class_name BoardLogic
 
 @export var cube_error: PackedScene
 @export var cube_simple: PackedScene
+@export var cube_bomb: PackedScene
 
 signal updated
 var scores: int = 0

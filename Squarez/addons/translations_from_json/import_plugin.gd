@@ -8,7 +8,7 @@ func _get_visible_name():
 	return "JSON Translation"
 
 func _get_recognized_extensions():
-	return ["json"]
+	return ["lang"]
 	
 func _get_save_extension():
 	return "translation"
