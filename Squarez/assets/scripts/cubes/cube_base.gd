@@ -11,3 +11,9 @@ func set_highlight(value):
 ## для активации действий на размещение (взрыв и т.д.)
 func placed():
 	pass
+
+func get_scores() -> int:
+	return 1
+
+func collapse():
+	queue_free()

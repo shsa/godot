@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://dimp06oxxkkl4"]
 
-[ext_resource type="Script" path="res://assets/scripts/cubes/cube_simple.gd" id="1_tu2hy"]
-[ext_resource type="ArrayMesh" uid="uid://c34g5kplpgxob" path="res://assets/models/cube.obj" id="2_6lh7j"]
-[ext_resource type="Shader" path="res://assets/shaders/highlight.gdshader" id="3_6dfx3"]
+[ext_resource type="Script" path="res://assets/scripts/cubes/cube_simple.gd" id="1_tjqxy"]
+[ext_resource type="ArrayMesh" uid="uid://c34g5kplpgxob" path="res://assets/models/cube.obj" id="2_dgfvg"]
+[ext_resource type="Shader" path="res://assets/shaders/highlight.gdshader" id="3_rj1ou"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_08e7o"]
 render_priority = 0
-shader = ExtResource("3_6dfx3")
+shader = ExtResource("3_rj1ou")
 shader_parameter/strength = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxsvw"]
@@ -19,11 +19,10 @@ ao_light_affect = 0.53
 backlight = Color(0.760784, 0.760784, 0.760784, 1)
 
 [node name="Cube" type="Node3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-script = ExtResource("1_tu2hy")
+script = ExtResource("1_tjqxy")
 color = Color(0, 0, 1, 1)
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.297867, 0)
-mesh = ExtResource("2_6lh7j")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.297867, 0)
+mesh = ExtResource("2_dgfvg")
 surface_material_override/0 = SubResource("StandardMaterial3D_jxsvw")

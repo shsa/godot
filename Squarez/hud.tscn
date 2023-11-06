@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://qnm5sohcep87"]
+
+[ext_resource type="Script" path="res://assets/scripts/hud.gd" id="1_c3pit"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c3pit")
+
+[node name="Panel" type="Panel" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -233.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 26.0
+text = "SCORES"
+
+[node name="Scores" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 118.0
+offset_bottom = 27.0
+text = "000
+"

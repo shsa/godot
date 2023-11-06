@@ -3,6 +3,7 @@ extends BoardBase
 class_name BoardMain
 
 @export var cell: PackedScene
+@onready var logic: BoardLogic = $Logic
 
 func _ready():
 	board_name = "main"

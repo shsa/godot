@@ -22,12 +22,21 @@ window/size/viewport_height=900
 window/stretch/mode="viewport"
 window/handheld/orientation=1
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/translations_from_json/plugin.cfg")
+
 [input]
 
 ssss={
 "deadzone": 0.5,
 "events": []
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://locale/en.json", "res://locale/ru.json")
+locale/test="ru"
 
 [rendering]
 

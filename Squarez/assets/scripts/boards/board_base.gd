@@ -29,20 +29,10 @@ func clear():
 	for cube in get_cubes():
 		cube.queue_free()
 
-func create_matrix(width: int, height: int):
-	var matrix = []
-	for x in range(width):
-		matrix.append([])
-		matrix[x] = []        
-		for y in range(height):
-			matrix[x].append([])
-			matrix[x][y] = null
-	return matrix
-
-func get_matrix():
-	var matrix = create_matrix(width, height)
+func get_matrix() -> CubeMatrix:
+	var matrix = CubeMatrix.new(width, height)
 	for cube in get_cubes():
-		matrix[cube.coord.x][cube.coord.y] = cube
+		matrix.set_cube(cube.coord, cube)
 	return matrix
 
 func in_board(cube: CubeBase) -> bool:

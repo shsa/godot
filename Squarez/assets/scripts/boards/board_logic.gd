@@ -1,13 +1,19 @@
 extends Node
 
+class_name BoardLogic
+
 @export var data: Data
 @export var main: BoardMain
 @export var active: BoardActive
 @export var preview: BoardBase
 @export var input: BoardInput
 @export var collection_name: String
+
 @export var cube_error: PackedScene
 @export var cube_simple: PackedScene
+
+signal updated
+var scores: int = 0
 
 func _ready():
 	input.connect("click_preview", _click_preview)
@@ -25,12 +31,12 @@ func _new_preview():
 	pass
 
 func _can_apply() -> bool:
-	var _main = main.get_matrix()
+	var _matrix = main.get_matrix()
 	var _errors = []
 	for cube in active.get_cubes():
-		if not main.in_board(cube):
+		if not _matrix.contains(cube.coord):
 			_errors.append(cube)
-		elif _main[cube.coord.x][cube.coord.y] != null:
+		elif _matrix.get_cube(cube.coord) != null:
 			_errors.append(cube)
 		pass
 
@@ -61,6 +67,7 @@ func _try_apply_preview():
 		return
 
 	await _apply()
+	await _find_clusters()
 	
 	for cube in preview.get_cubes():
 		preview.remove_cube(cube)
@@ -69,6 +76,42 @@ func _try_apply_preview():
 	
 	active.start_from_preview()
 	_new_preview()
+
+func _select_cluster(matrix: CubeMatrix, start_x: int, start_y: int) -> Array:
+	var list = []
+	for x in range(start_x, start_x + BoardActive.preview_size):
+		for y in range(start_y, start_y + BoardActive.preview_size):
+			var pos = Vector2i(x, y)
+			var cube = matrix.get_cube(pos)
+			if cube == null: 
+				return []
+			if cube.get_scores() == 0: 
+				return []
+			list.append(cube)
+		pass
+	pass
+	return list
+
+func _find_clusters():
+	var list = []
+	var m = main.get_matrix()
+	var _hash = {}
+	for x in range(m.width):
+		for y in range(m.height):
+			for cube in _select_cluster(m, x, y):
+				if not _hash.has(cube.coord):
+					_hash[cube.coord] = true
+					list.append(cube)
+				pass
+			pass
+		pass
+	pass
+	var jobs = Jobs.new()
+	for cube in list:
+		scores += cube.get_scores()
+		jobs.add(cube.collapse)
+	await jobs.all()
+	updated.emit()
 
 func _click_preview():
 	active.lock()
