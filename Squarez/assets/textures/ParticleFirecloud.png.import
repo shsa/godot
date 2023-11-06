@@ -2,19 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mqascih0wnh"
-path.s3tc="res://.godot/imported/bomb_Bomb Texture.png-845922f8358ce05a9e6a20f712b1d0e0.s3tc.ctex"
-path.etc2="res://.godot/imported/bomb_Bomb Texture.png-845922f8358ce05a9e6a20f712b1d0e0.etc2.ctex"
+uid="uid://buvpgfddh741f"
+path.s3tc="res://.godot/imported/ParticleFirecloud.png-602e5bd47dee566251304a2fda714474.s3tc.ctex"
+path.etc2="res://.godot/imported/ParticleFirecloud.png-602e5bd47dee566251304a2fda714474.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://assets/bomb_Bomb Texture.png"
-dest_files=["res://.godot/imported/bomb_Bomb Texture.png-845922f8358ce05a9e6a20f712b1d0e0.s3tc.ctex", "res://.godot/imported/bomb_Bomb Texture.png-845922f8358ce05a9e6a20f712b1d0e0.etc2.ctex"]
+source_file="res://assets/textures/ParticleFirecloud.png"
+dest_files=["res://.godot/imported/ParticleFirecloud.png-602e5bd47dee566251304a2fda714474.s3tc.ctex", "res://.godot/imported/ParticleFirecloud.png-602e5bd47dee566251304a2fda714474.etc2.ctex"]
 
 [params]
 

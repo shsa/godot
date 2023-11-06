@@ -21,6 +21,7 @@ func remove_cube(cube: CubeBase):
 func add_cube(cube: CubeBase):
 	_pivot.add_child(cube)
 	cube.add_to_group(board_name)
+	cube.board = self
 	
 func get_cubes() -> Array:
 	return get_tree().get_nodes_in_group(board_name)

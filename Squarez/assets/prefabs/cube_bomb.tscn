@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6b6mlbarbcso"]
+
+[ext_resource type="Script" path="res://assets/scripts/cubes/cube_bomb.gd" id="1_5nyky"]
+[ext_resource type="ArrayMesh" uid="uid://12u6inog5q46" path="res://assets/models/bomb.obj" id="1_vu2v8"]
+[ext_resource type="Texture2D" uid="uid://mqascih0wnh" path="res://assets/textures/bomb.png" id="2_vydca"]
+[ext_resource type="Shader" path="res://assets/shaders/highlight.gdshader" id="4_o61vn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oagn3"]
+render_priority = 0
+shader = ExtResource("4_o61vn")
+shader_parameter/strength = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dyhbg"]
+next_pass = SubResource("ShaderMaterial_oagn3")
+albedo_texture = ExtResource("2_vydca")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n20cq"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.968627, 0.956863, 0.156863, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ql2iw"]
+material = SubResource("StandardMaterial3D_n20cq")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_hhxbv"]
+_data = [Vector2(0, 0), 1.4, 0.0, 0, 0, Vector2(0.233438, 0.715789), 2.59532, 2.59532, 0, 0, Vector2(0.504732, 1), 0.0, 0.0, 0, 0, Vector2(0.801262, 0.673684), -2.1762, -2.1762, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_5nyky")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.426884, -0.10432, 0.23851, -0.0138388, 0.448357, 0.220872, -0.259958, -0.195175, 0.379906, 0, 0, 0)
+mesh = ExtResource("1_vu2v8")
+surface_material_override/0 = SubResource("StandardMaterial3D_dyhbg")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Model"]
+transform = Transform3D(1.99994, -0.00285378, 0.0150607, 0.00269857, 1.99989, 0.0205835, -0.0150893, -0.0205627, 1.99984, -0.159256, 1.27278, -0.658371)
+amount = 20
+lifetime = 0.14
+mesh = SubResource("QuadMesh_ql2iw")
+emission_shape = 1
+emission_sphere_radius = 0.23
+gravity = Vector3(0, 0, 0)
+linear_accel_max = 4.85
+radial_accel_min = 1.0
+radial_accel_max = 2.0
+scale_amount_min = 0.1
+scale_amount_curve = SubResource("Curve_hhxbv")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Model/CPUParticles3D"]
+light_color = Color(1, 1, 0.176471, 1)

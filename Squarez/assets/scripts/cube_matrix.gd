@@ -5,9 +5,9 @@ var height: int
 
 var _data = {}
 
-func _init(width: int, height: int):
-	self.width = width
-	self.height = height
+func _init(w: int, h: int):
+	self.width = w
+	self.height = h
 
 func get_cube(pos: Vector2i) -> CubeBase:
 	if _data.has(pos):

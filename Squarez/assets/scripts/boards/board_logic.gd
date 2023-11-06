@@ -12,6 +12,7 @@ class_name BoardLogic
 @export var cube_error: PackedScene
 @export var cube_simple: PackedScene
 @export var cube_bomb: PackedScene
+@export var cube_test: PackedScene
 
 signal updated
 var scores: int = 0
@@ -20,11 +21,21 @@ func _ready():
 	input.connect("click_preview", _click_preview)
 	_new_preview()
 
+func _new_cube(cube_name: String) -> CubeBase:
+	match cube_name:
+		"bomb":
+			return cube_bomb.instantiate()
+		"simple":
+			return cube_simple.instantiate()
+		_:
+			return cube_error.instantiate()
+	
+
 func _new_preview():
 	var collection = data.get_collection(collection_name)
-	var figure = collection.next_figure()
-	for coord in figure:
-		var cube = cube_simple.instantiate()
+	var shape = collection.next_shape()
+	for coord in shape:
+		var cube = _new_cube(collection.next_cube())
 		cube.coord = coord
 		preview.add_cube(cube)
 		pass
@@ -63,13 +74,13 @@ func _apply():
 	await jobs.all()
 	return true
 
-func _try_apply_preview():
-	if not (await _can_apply()):
-		return
-
+func _apply_active():
 	await _apply()
 	await _find_clusters()
-	
+
+func _apply_preview():
+	_apply_active()
+		
 	for cube in preview.get_cubes():
 		preview.remove_cube(cube)
 		active.add_cube(cube)
@@ -116,5 +127,6 @@ func _find_clusters():
 
 func _click_preview():
 	active.lock()
-	await _try_apply_preview()
+	if await _can_apply():
+		_apply_preview()
 	active.unlock()

@@ -22,22 +22,22 @@ func _process(delta):
 
 func _screen_to_local(screen_position: Vector2) -> Vector2:
 	var viewport = get_viewport()
-	var camera = get_viewport().get_camera_3d()
+	var camera = viewport.get_camera_3d()
 	var world_position = camera.project_position(screen_position, 100.0)
 	world_position = to_local(world_position)
 	return Vector2(world_position.x, world_position.z)
 
 func _check_touch(screen_position: Vector2, collider: Node3D):
 	var viewport = get_viewport()
-	var mouse_position = viewport.get_mouse_position()
-	var camera = get_viewport().get_camera_3d()
-	var origin = camera.project_ray_origin(mouse_position)
-	var end = origin + camera.project_ray_normal(mouse_position) * camera.far
+	#var mouse_position = viewport.get_mouse_position()
+	var camera = viewport.get_camera_3d()
+	var origin = camera.project_ray_origin(screen_position)
+	var end = origin + camera.project_ray_normal(screen_position) * camera.far
 	var space_state = get_world_3d().direct_space_state
 	var params = PhysicsRayQueryParameters3D.create(origin, end)
 	params.set_collide_with_areas(true)
 	var result = space_state.intersect_ray(params)
-	return result.has("collider") && result["collider"] == board_preview
+	return result.has("collider") && result["collider"] == collider
 	
 
 func _input(event):

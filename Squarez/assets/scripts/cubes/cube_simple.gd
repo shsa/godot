@@ -2,8 +2,6 @@ extends CubeBase
 
 @export var color: Color = Color(0, 1, 0)
 
-@export var highlight: bool = false
-
 func set_color(value):
 	color = value
 	var material = $Cube.get_surface_override_material(0)

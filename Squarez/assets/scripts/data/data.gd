@@ -2,16 +2,16 @@ extends Node
 
 class_name Data
 
-var data: Dictionary
+var _data: Dictionary
 
 func _ready():
-	var _list = load_json_file("res://assets/data/figures.json")
+	var _list = load_json_file("res://assets/data/shapes.json")
 	for item in _list:
 		var collection = Collection.new(item)
-		data[collection.name] = collection
+		_data[collection.name] = collection
 
-func get_collection(name: String) -> Collection:
-	return data[name]
+func get_collection(_name: String) -> Collection:
+	return _data[_name]
 
 func load_json_file(filePath: String) -> Array:
 	if FileAccess.file_exists(filePath):

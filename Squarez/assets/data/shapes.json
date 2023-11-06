@@ -1,0 +1,92 @@
+[
+	{
+		"name": "test",
+		"cubes": {
+			"simple": 100,
+			"bomb": 0
+		},
+		"items": [
+			{
+				"count": 1,
+				"lines": [
+					"s..",
+					"...",
+					"..."
+				]
+			}
+		]
+	},
+	{
+		"name": "main",
+		"cubes": {
+			"simple": 100,
+			"bomb": 10
+		},
+		"items": [
+			{
+				"count": 0,
+				"lines": [
+					"S..",
+					"...",
+					"..."
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"sss",
+					"...",
+					"sss"
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"ss.",
+					"sss",
+					"sss"
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"s.s",
+					"s.s",
+					"sss"
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"s.s",
+					"sss",
+					"s.s"
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"s..",
+					"ss.",
+					"sss"
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					".s.",
+					".s.",
+					".s."
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"s..",
+					"sss",
+					"..s"
+				]
+			}
+		]
+	}
+]

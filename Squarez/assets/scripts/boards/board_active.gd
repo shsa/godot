@@ -25,11 +25,18 @@ func lock():
 func unlock():
 	_locked = false
 
+func _align():
+	for cube in super.get_cubes():
+		cube.coord = Vector2i(roundi(cube.position.x), roundi(cube.position.y))
+	var pos := Shape.calc_center(super.get_cubes())
+	
+
 func add_cube(cube: CubeBase):
+	#NOTIFICATION_CHILD_ORDER_CHANGED
 	super.add_cube(cube)
-	cube.position.x = cube.coord.x - 1
+	cube.position.x = cube.coord.x
 	cube.position.y = 0
-	cube.position.z = cube.coord.y - 1
+	cube.position.z = cube.coord.y
 
 func get_cubes() -> Array:
 	for cube in super.get_cubes():

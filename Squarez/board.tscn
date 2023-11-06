@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4muwshb4g4i6"]
+[gd_scene load_steps=18 format=3 uid="uid://4muwshb4g4i6"]
 
 [ext_resource type="Script" path="res://assets/scripts/boards/board_main.gd" id="1_s4as1"]
 [ext_resource type="PackedScene" uid="uid://dimp06oxxkkl4" path="res://assets/prefabs/cube_simple.tscn" id="2_nkfwr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://assets/scripts/boards/board_logic.gd" id="8_k868v"]
 [ext_resource type="Script" path="res://assets/scripts/data/data.gd" id="9_8irmo"]
 [ext_resource type="PackedScene" uid="uid://567jsb1cdvj0" path="res://assets/prefabs/cube_error.tscn" id="10_cuthu"]
+[ext_resource type="PackedScene" uid="uid://b6b6mlbarbcso" path="res://assets/prefabs/cube_bomb.tscn" id="11_echqq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lard"]
 custom_aabb = AABB(0, 0, 0, 1, 0, 0)
@@ -53,6 +54,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -6.5)
 
 [node name="Cube" parent="Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
+coord = Vector2i(0, 0)
+highlight = false
 
 [node name="Active" type="Node3D" parent="Pivot" node_paths=PackedStringArray("main", "preview", "input")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.779, 13.419)
@@ -70,12 +73,17 @@ skeleton = NodePath("../../..")
 
 [node name="Cube" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 0, -1)
+coord = Vector2i(0, 0)
 highlight = true
 
 [node name="Cube2" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
+coord = Vector2i(0, 0)
+highlight = false
 
 [node name="Cube3" parent="Pivot/Active/Pivot" groups=["trash"] instance=ExtResource("2_nkfwr")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 1)
+coord = Vector2i(0, 0)
+highlight = false
 
 [node name="Preview" type="Area3D" parent="Pivot" node_paths=PackedStringArray("main", "input")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.59055, -0.082, 14.3225)
@@ -110,3 +118,4 @@ input = NodePath("../Input")
 collection_name = "test"
 cube_error = ExtResource("10_cuthu")
 cube_simple = ExtResource("2_nkfwr")
+cube_bomb = ExtResource("11_echqq")
