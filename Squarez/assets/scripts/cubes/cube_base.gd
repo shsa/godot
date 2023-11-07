@@ -23,4 +23,8 @@ func get_scores() -> int:
 	return 0
 
 func collapse():
+	board.remove_cube(self)
 	queue_free()
+
+func explode():
+	collapse()

@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://assets/scripts/boards/board_input.gd" id="7_c1ato"]
 [ext_resource type="Script" path="res://assets/scripts/boards/board_logic.gd" id="8_k868v"]
 [ext_resource type="Script" path="res://assets/scripts/data/data.gd" id="9_8irmo"]
-[ext_resource type="PackedScene" path="res://assets/prefabs/cube_error.tscn" id="10_cuthu"]
+[ext_resource type="PackedScene" uid="uid://567jsb1cdvj0" path="res://assets/prefabs/cube_error.tscn" id="10_cuthu"]
 [ext_resource type="PackedScene" uid="uid://dl1itsnpo37k0" path="res://assets/prefabs/cube_bomb.tscn" id="11_echqq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lard"]

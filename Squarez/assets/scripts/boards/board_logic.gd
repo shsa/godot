@@ -115,8 +115,11 @@ func _find_clusters():
 			pass
 		pass
 	pass
+
+func _collapse_clusters(clusters: Array):
 	var jobs = Jobs.new()
-	for cube in list:
+	for cube in clusters:
+		main.ignore_cube(cube)
 		scores += cube.get_scores()
 		jobs.add(cube.collapse)
 	await jobs.all()
@@ -130,7 +133,8 @@ func _activate_cubes():
 
 func _apply_active():
 	await _apply()
-	await _find_clusters()
+	var clusters = await _find_clusters()
+	await _collapse_clusters(clusters)
 	await _activate_cubes()
 
 func _apply_preview():

@@ -14,15 +14,23 @@ var height: int
 func _hello():
 	print("hello base")
 
-func remove_cube(cube: CubeBase):
-	cube.remove_from_group(board_name)
-	cube.get_parent().remove_child(cube)
+func add_object(cube: CubeBase):
+	_pivot.add_child(cube)
+	cube.board = self
 
 func add_cube(cube: CubeBase):
 	_pivot.add_child(cube)
 	cube.add_to_group(board_name)
 	cube.board = self
-	
+
+func remove_cube(cube: CubeBase):
+	cube.remove_from_group(board_name)
+	cube.get_parent().remove_child(cube)
+
+## Оставляет Cube на доске, но исключает его из кубов
+func ignore_cube(cube: CubeBase):
+	cube.remove_from_group(board_name)
+
 func get_cubes() -> Array:
 	return get_tree().get_nodes_in_group(board_name)
 	

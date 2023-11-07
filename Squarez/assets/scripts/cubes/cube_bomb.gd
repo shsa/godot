@@ -16,9 +16,7 @@ func activate():
 			jobs.add(obj.play)
 			var cube = m.get_cube(pos)
 			if cube != null:
-				jobs.add(cube.collapse)
+				jobs.add(cube.explode)
 		pass
 	await jobs.all()
 
-func collapse():
-	queue_free()

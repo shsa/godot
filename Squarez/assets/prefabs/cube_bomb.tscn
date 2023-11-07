@@ -1,19 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dl1itsnpo37k0"]
+[gd_scene load_steps=8 format=3 uid="uid://dl1itsnpo37k0"]
 
 [ext_resource type="Script" path="res://assets/scripts/cubes/cube_bomb.gd" id="1_5nyky"]
 [ext_resource type="ArrayMesh" uid="uid://12u6inog5q46" path="res://assets/models/bomb.obj" id="1_vu2v8"]
 [ext_resource type="Texture2D" uid="uid://mqascih0wnh" path="res://assets/textures/bomb.png" id="2_vydca"]
-[ext_resource type="Shader" path="res://assets/shaders/highlight.gdshader" id="4_o61vn"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oagn3"]
-render_priority = 0
-shader = ExtResource("4_o61vn")
-shader_parameter/strength = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dyhbg"]
-next_pass = SubResource("ShaderMaterial_oagn3")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmbir"]
 albedo_texture = ExtResource("2_vydca")
-roughness = 0.61
+metallic = 0.42
+roughness = 0.63
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n20cq"]
 shading_mode = 0
@@ -37,12 +31,12 @@ point_count = 5
 script = ExtResource("1_5nyky")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.426884, -0.10432, 0.23851, -0.0138388, 0.448357, 0.220872, -0.259958, -0.195175, 0.379906, 0, 0, 0)
+transform = Transform3D(0.395635, -0.2776, 0.128105, 0.174509, 0.377068, 0.278149, -0.251037, -0.17538, 0.39525, 0, 0, 0)
 mesh = ExtResource("1_vu2v8")
-surface_material_override/0 = SubResource("StandardMaterial3D_dyhbg")
+surface_material_override/0 = SubResource("StandardMaterial3D_dmbir")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Model"]
-transform = Transform3D(1.99994, -0.00285384, 0.0150608, 0.00269848, 1.99989, 0.0205835, -0.0150892, -0.0205626, 1.99984, -0.159256, 1.27278, -0.658371)
+transform = Transform3D(1.99994, -0.0028536, 0.0150582, 0.00269848, 1.99989, 0.0205819, -0.0150895, -0.0205646, 1.99984, 0.0121053, 1.36093, 0.0049133)
 amount = 20
 lifetime = 0.14
 mesh = SubResource("QuadMesh_ql2iw")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://8etnuv745gf6"]
+[gd_scene load_steps=6 format=3 uid="uid://nt34tiqaoc3q"]
 
 [ext_resource type="ArrayMesh" uid="uid://c34g5kplpgxob" path="res://assets/models/cube.obj" id="1_w5gw2"]
 [ext_resource type="Shader" path="res://assets/shaders/fragment_texture.gdshader" id="2_enc6c"]
