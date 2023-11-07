@@ -52,6 +52,10 @@ func _run():
 	if not _check():
 		await completed
 
+func clear():
+	_list = []
+	_counter = 0
+
 func all():
 	_mode = ALL
 	await _run()

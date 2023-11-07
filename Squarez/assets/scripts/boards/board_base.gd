@@ -44,10 +44,12 @@ func get_matrix() -> CubeMatrix:
 		matrix.set_cube(cube.coord, cube)
 	return matrix
 
-func in_board(cube: CubeBase) -> bool:
-	if cube.coord.x < 0 or cube.coord.y < 0:
+func in_board(pos) -> bool:
+	if pos is CubeBase:
+		pos = pos.coord
+	if pos.x < 0 or pos.y < 0:
 		return false
-	if cube.coord.x >= width or cube.coord.y >= height:
+	if pos.x >= width or pos.y >= height:
 		return false
-		
+	
 	return true

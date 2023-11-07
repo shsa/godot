@@ -1,5 +1,8 @@
 class_name Shape
 
+static var TEST = 10
+const TEST2 = 10
+
 static func calc_center(shape: Array) -> Vector2i:
 	var x := 0
 	var y := 0

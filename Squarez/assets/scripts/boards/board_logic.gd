@@ -24,7 +24,7 @@ func _cube_prefab(cube_name: String) -> PackedScene:
 	if _cubePrefabs.has(cube_name):
 		return _cubePrefabs[cube_name]
 	
-	var path = "res://assets/prefabs/cube_" + cube_name + ".tscn"
+	var path = "res://assets/prefabs/cubes/cube_" + cube_name + ".tscn"
 	var prefab: PackedScene = null
 	if ResourceLoader.exists(path):
 		prefab = ResourceLoader.load(path)
@@ -114,7 +114,7 @@ func _find_clusters():
 				pass
 			pass
 		pass
-	pass
+	return list
 
 func _collapse_clusters(clusters: Array):
 	var jobs = Jobs.new()
@@ -123,6 +123,12 @@ func _collapse_clusters(clusters: Array):
 		scores += cube.get_scores()
 		jobs.add(cube.collapse)
 	await jobs.all()
+
+	jobs = Jobs.new()
+	for cube in clusters:
+		jobs.add(cube.post_collapse)
+	await jobs.all()
+	
 	updated.emit()
 
 func _activate_cubes():

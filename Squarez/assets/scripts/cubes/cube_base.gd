@@ -2,10 +2,16 @@ extends Node3D
 
 class_name CubeBase
 
+const TEST = 10
+
 @export var coord: Vector2i
 @export var highlight: bool = false
 
 var board: BoardBase
+
+func remove_from_board():
+	if board != null:
+		board.remove_cube(self)
 
 func set_highlight(value):
 	highlight = value
@@ -23,8 +29,10 @@ func get_scores() -> int:
 	return 0
 
 func collapse():
-	board.remove_cube(self)
+	pass
+
+func post_collapse():
 	queue_free()
 
 func explode():
-	collapse()
+	queue_free()

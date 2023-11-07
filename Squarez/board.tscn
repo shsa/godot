@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://4muwshb4g4i6"]
 
 [ext_resource type="Script" path="res://assets/scripts/boards/board_main.gd" id="1_s4as1"]
-[ext_resource type="PackedScene" uid="uid://bwcwehkjv72tq" path="res://assets/prefabs/cube_simple.tscn" id="2_nkfwr"]
+[ext_resource type="PackedScene" uid="uid://bwcwehkjv72tq" path="res://assets/prefabs/cubes/cube_simple.tscn" id="2_nkfwr"]
 [ext_resource type="Script" path="res://assets/scripts/boards/board_preview.gd" id="3_04scc"]
 [ext_resource type="Texture2D" uid="uid://du8lgle2bflad" path="res://assets/border.png" id="3_fst7i"]
 [ext_resource type="Shader" path="res://assets/shaders/doted_border_simple.gdshader" id="4_45154"]
@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://assets/scripts/boards/board_input.gd" id="7_c1ato"]
 [ext_resource type="Script" path="res://assets/scripts/boards/board_logic.gd" id="8_k868v"]
 [ext_resource type="Script" path="res://assets/scripts/data/data.gd" id="9_8irmo"]
-[ext_resource type="PackedScene" uid="uid://567jsb1cdvj0" path="res://assets/prefabs/cube_error.tscn" id="10_cuthu"]
-[ext_resource type="PackedScene" uid="uid://dl1itsnpo37k0" path="res://assets/prefabs/cube_bomb.tscn" id="11_echqq"]
+[ext_resource type="PackedScene" uid="uid://567jsb1cdvj0" path="res://assets/prefabs/cubes/cube_error.tscn" id="10_cuthu"]
+[ext_resource type="PackedScene" uid="uid://dl1itsnpo37k0" path="res://assets/prefabs/cubes/cube_bomb.tscn" id="11_echqq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lard"]
 custom_aabb = AABB(0, 0, 0, 1, 0, 0)

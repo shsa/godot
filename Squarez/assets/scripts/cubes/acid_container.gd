@@ -1,36 +1,48 @@
 extends MeshInstance3D
 
+class_name AcidContainer
+
 @onready var buble = $buble
 
-var life_time: float = 1
-var max_count: int = 32
-var _count: int = 0
-var _spawn_delta: float = 0.1
-var _time_delta: float = 0
+@export var life_time: float = 5
+@export var max_count: int = 8
+@export var max_scale: float = 0.4
+
+var _queue = []
 
 func _ready():
 	buble.visible = false
+	var _delta: float = life_time / max_count
+	var _time: float = 0
+	var _list = []
+	for i in range(max_count):
+		_list.append(_time)
+		_time += _delta
+	_list.shuffle()
+	for f in _list:
+		_spawn(f)
 	pass
 
 func _process(delta):
-	_time_delta += delta
-	if _time_delta > _spawn_delta:
-		_time_delta -= _spawn_delta
-		if _count < max_count:
-			_spawn()
+	if len(_queue) > 0:
+		_spawn(0)
 	pass
 
-func _spawn():
-	_count += 1
-	var n := buble.duplicate()
+func _spawn(delta: float):
+	if len(_queue) == 0:
+		var t = buble.duplicate()
+		add_child(t)
+		_queue.push_back(t)
+	var n = _queue.pop_front()
 	n.visible = true
 	n.scale = Vector3.ZERO
 	n.position = Vector3(0.9 * randf() - 0.5, buble.position.y, 0.9 * randf() - 0.5)
-	add_child(n)
-	var tween := n.create_tween()
-	var _scale := 0.1 + randf() * 0.4
-	tween.tween_property(n, "scale", Vector3(_scale, _scale, _scale), life_time).set_ease(Tween.EASE_OUT)
+	var tween := create_tween()
+	var _scale := 0.1 + randf() * max_scale
+	var _time = life_time / 6
+	tween.tween_property(n, "scale", Vector3(_scale, _scale, _scale), _time * 5).set_ease(Tween.EASE_OUT)
+	tween.tween_property(n, "scale", Vector3.ZERO, _time * 1).set_ease(Tween.EASE_IN)
+	tween.custom_step(delta)
 	await tween.finished
-	n.queue_free()
-	_count -= 1
+	_queue.push_back(n)
 	pass

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b31v5o0k47fy3"]
 
 [ext_resource type="Script" path="res://assets/scripts/cubes/cube_acid.gd" id="1_o8tbd"]
-[ext_resource type="PackedScene" uid="uid://8etnuv745gf6" path="res://assets/prefabs/cube.tscn" id="2_dnoul"]
-[ext_resource type="PackedScene" uid="uid://cnjtl7w0fgeip" path="res://assets/prefabs/acid_container.tscn" id="3_t4tya"]
+[ext_resource type="PackedScene" uid="uid://nt34tiqaoc3q" path="res://assets/prefabs/cubes/cube.tscn" id="2_dnoul"]
+[ext_resource type="PackedScene" uid="uid://bxd8ruwlt15nw" path="res://assets/prefabs/acid_container.tscn" id="3_t4tya"]
 
 [node name="Cube" type="Node3D"]
 script = ExtResource("1_o8tbd")

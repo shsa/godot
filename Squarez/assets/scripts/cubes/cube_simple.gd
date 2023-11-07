@@ -19,6 +19,5 @@ func placed():
 
 func collapse():
 	var tween := create_tween()
-	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
+	tween.tween_property(self, "scale", Vector3.ZERO, Global.COLLAPSE_TIME)
 	await tween.finished
-	queue_free()

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwcwehkjv72tq"]
+
+[ext_resource type="Script" path="res://assets/scripts/cubes/cube_simple.gd" id="1_lp167"]
+[ext_resource type="PackedScene" uid="uid://nt34tiqaoc3q" path="res://assets/prefabs/cubes/cube.tscn" id="2_tfcd1"]
+
+[node name="Cube" type="Node3D"]
+script = ExtResource("1_lp167")
+color = Color(0, 0, 1, 1)
+
+[node name="cube" parent="." instance=ExtResource("2_tfcd1")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

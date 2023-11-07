@@ -3,7 +3,7 @@
 		"name": "test",
 		"cubes": {
 			"simple": 10,
-			"bomb": 1,
+			"bomb": 0,
 			"acid": 10
 		},
 		"items": [
@@ -24,9 +24,17 @@
 				]
 			},
 			{
-				"count": 1,
+				"count": 0,
 				"lines": [
 					"ss.",
+					"sss",
+					"sss"
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"sss",
 					"sss",
 					"sss"
 				]
