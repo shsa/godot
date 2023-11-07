@@ -2,16 +2,33 @@
 	{
 		"name": "test",
 		"cubes": {
-			"simple": 100,
-			"bomb": 0
+			"simple": 10,
+			"bomb": 1,
+			"acid": 10
 		},
 		"items": [
 			{
-				"count": 1,
+				"count": 0,
 				"lines": [
 					"s..",
 					"...",
 					"..."
+				]
+			},
+			{
+				"count": 0,
+				"lines": [
+					"s..",
+					"s..",
+					"s.."
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"ss.",
+					"sss",
+					"sss"
 				]
 			}
 		]

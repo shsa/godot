@@ -11,12 +11,16 @@ func set_highlight(value):
 	highlight = value
 
 ## Вызывается сразу после помещения квадрата на главную доску
-## для активации действий на размещение (взрыв и т.д.)
 func placed():
 	pass
 
+## Вызывается для активации действий на события типа взрыв и т.д.
+func activate():
+	pass
+
+## Количество очков 
 func get_scores() -> int:
-	return 1
+	return 0
 
 func collapse():
 	queue_free()

@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://8etnuv745gf6"]
+
+[ext_resource type="ArrayMesh" uid="uid://c34g5kplpgxob" path="res://assets/models/cube.obj" id="1_w5gw2"]
+[ext_resource type="Shader" path="res://assets/shaders/fragment_texture.gdshader" id="2_enc6c"]
+[ext_resource type="Texture2D" uid="uid://bk4cwugy3774n" path="res://assets/textures/wood.png" id="3_xt022"]
+[ext_resource type="Script" path="res://assets/scripts/cubes/cube.gd" id="4_ydw60"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbduj"]
+render_priority = 0
+shader = ExtResource("2_enc6c")
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/offset = null
+shader_parameter/scale = 1.0
+shader_parameter/highlight = 0.0
+shader_parameter/texture_albedo = ExtResource("3_xt022")
+
+[node name="cube" type="MeshInstance3D"]
+mesh = ExtResource("1_w5gw2")
+surface_material_override/0 = SubResource("ShaderMaterial_wbduj")
+script = ExtResource("4_ydw60")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.786051, 0.618161, 0, -0.618161, 0.786051, 0.206223, 1.20658, 1.19789)
+visible = false

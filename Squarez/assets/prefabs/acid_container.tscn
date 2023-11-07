@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnjtl7w0fgeip"]
+
+[ext_resource type="ArrayMesh" uid="uid://ciuigtccbu4em" path="res://assets/models/container.obj" id="1_fqy3p"]
+[ext_resource type="Material" uid="uid://ohl3bjnu3fub" path="res://assets/materials/acid.tres" id="2_1c2vg"]
+[ext_resource type="Script" path="res://assets/scripts/cubes/acid_container.gd" id="3_5uiwp"]
+[ext_resource type="ArrayMesh" uid="uid://7b3hohlnfgc0" path="res://assets/models/dome.obj" id="4_7be3p"]
+
+[node name="acid_container" type="MeshInstance3D"]
+mesh = ExtResource("1_fqy3p")
+surface_material_override/0 = ExtResource("2_1c2vg")
+script = ExtResource("3_5uiwp")
+
+[node name="buble" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.446397, 0)
+mesh = ExtResource("4_7be3p")
+surface_material_override/0 = ExtResource("2_1c2vg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.876416, 0.481555, 0, -0.481555, 0.876416, 0, 1.62247, 1.15404)
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.965754, -0.162554, 0.202227, -0.2151, -0.0657512, 0.974376, -0.145092, -0.984507, -0.0984647, 0.39658, 2.75803, -0.00037694)
+visible = false

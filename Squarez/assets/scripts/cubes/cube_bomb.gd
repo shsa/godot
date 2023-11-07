@@ -1,26 +1,9 @@
 extends CubeBase
 
-func set_highlight(value):
-	highlight = value
-	var material = $Model.get_surface_override_material(0)
-	var next_pass = material.next_pass
-	if value:
-		next_pass.set_shader_parameter("strength", 0.2)
-	else:
-		next_pass.set_shader_parameter("strength", 0.0)
-
-func update():
-	set_highlight(highlight)
-			
 func _ready():
-	var material = $Model.get_surface_override_material(0)
-	var new_material = material.duplicate()
-	new_material.next_pass = new_material.next_pass.duplicate()
-	new_material.next_pass.shader = new_material.next_pass.shader.duplicate()
-	$Model.set_surface_override_material(0, new_material)
-	update()
+	pass
 
-func placed():
+func activate():
 	var explosion = ResourceLoader.load("res://assets/prefabs/explosion.tscn")
 	var m = board.get_matrix()
 	var jobs = Jobs.new()

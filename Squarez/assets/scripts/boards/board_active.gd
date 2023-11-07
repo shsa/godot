@@ -26,10 +26,21 @@ func unlock():
 	_locked = false
 
 func _align():
-	for cube in super.get_cubes():
-		cube.coord = Vector2i(roundi(cube.position.x), roundi(cube.position.y))
-	var pos := Shape.calc_center(super.get_cubes())
-	
+	var x := 0.0
+	var z := 0.0
+	var _list = []
+	_list.append_array(super.get_cubes())
+	if len(_list) > 0:
+		for cube in _list:
+			x += cube.position.x
+			z += cube.position.z
+		x = round(x / len(_list))
+		z = round(z / len(_list))
+		var _center = Vector3(x, 0, z)
+		var _pos = _pivot.to_global(_center)
+		_pivot.position = Vector3(-x, 0, -z)
+		_pos = get_parent().to_local(_pos)
+		position = Vector3(_pos.x, position.y, _pos.z)
 
 func add_cube(cube: CubeBase):
 	#NOTIFICATION_CHILD_ORDER_CHANGED
@@ -106,6 +117,7 @@ func _rotate():
 	if _locked: return
 		
 	_locked = true
+	_align()
 	var tween = create_tween()
 	var rot = rotation + Vector3(0.0, -PI / 2, 0.0)
 	tween.tween_property(self, "rotation", rot, 0.5)

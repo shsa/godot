@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6b6mlbarbcso"]
+[gd_scene load_steps=10 format=3 uid="uid://dl1itsnpo37k0"]
 
 [ext_resource type="Script" path="res://assets/scripts/cubes/cube_bomb.gd" id="1_5nyky"]
 [ext_resource type="ArrayMesh" uid="uid://12u6inog5q46" path="res://assets/models/bomb.obj" id="1_vu2v8"]
@@ -13,6 +13,7 @@ shader_parameter/strength = 0.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dyhbg"]
 next_pass = SubResource("ShaderMaterial_oagn3")
 albedo_texture = ExtResource("2_vydca")
+roughness = 0.61
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n20cq"]
 shading_mode = 0
@@ -41,7 +42,7 @@ mesh = ExtResource("1_vu2v8")
 surface_material_override/0 = SubResource("StandardMaterial3D_dyhbg")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Model"]
-transform = Transform3D(1.99994, -0.00285378, 0.0150607, 0.00269857, 1.99989, 0.0205835, -0.0150893, -0.0205627, 1.99984, -0.159256, 1.27278, -0.658371)
+transform = Transform3D(1.99994, -0.00285384, 0.0150608, 0.00269848, 1.99989, 0.0205835, -0.0150892, -0.0205626, 1.99984, -0.159256, 1.27278, -0.658371)
 amount = 20
 lifetime = 0.14
 mesh = SubResource("QuadMesh_ql2iw")
@@ -55,4 +56,5 @@ scale_amount_min = 0.1
 scale_amount_curve = SubResource("Curve_hhxbv")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Model/CPUParticles3D"]
+visible = false
 light_color = Color(1, 1, 0.176471, 1)

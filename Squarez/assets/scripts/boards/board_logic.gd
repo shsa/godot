@@ -12,24 +12,36 @@ class_name BoardLogic
 @export var cube_error: PackedScene
 @export var cube_simple: PackedScene
 @export var cube_bomb: PackedScene
+@export var cube_acid: PackedScene
 @export var cube_test: PackedScene
 
 signal updated
 var scores: int = 0
 
+var _cubePrefabs = {}
+
+func _cube_prefab(cube_name: String) -> PackedScene:
+	if _cubePrefabs.has(cube_name):
+		return _cubePrefabs[cube_name]
+	
+	var path = "res://assets/prefabs/cube_" + cube_name + ".tscn"
+	var prefab: PackedScene = null
+	if ResourceLoader.exists(path):
+		prefab = ResourceLoader.load(path)
+	_cubePrefabs[cube_name] = prefab
+	
+	return prefab
+	
 func _ready():
 	input.connect("click_preview", _click_preview)
+	
 	_new_preview()
 
 func _new_cube(cube_name: String) -> CubeBase:
-	match cube_name:
-		"bomb":
-			return cube_bomb.instantiate()
-		"simple":
-			return cube_simple.instantiate()
-		_:
-			return cube_error.instantiate()
-	
+	var prefab = _cube_prefab(cube_name)
+	if prefab == null:
+		prefab = _cube_prefab("error")
+	return prefab.instantiate()
 
 func _new_preview():
 	var collection = data.get_collection(collection_name)
@@ -74,21 +86,6 @@ func _apply():
 	await jobs.all()
 	return true
 
-func _apply_active():
-	await _apply()
-	await _find_clusters()
-
-func _apply_preview():
-	_apply_active()
-		
-	for cube in preview.get_cubes():
-		preview.remove_cube(cube)
-		active.add_cube(cube)
-		cube.set_highlight(true)
-	
-	active.start_from_preview()
-	_new_preview()
-
 func _select_cluster(matrix: CubeMatrix, start_x: int, start_y: int) -> Array:
 	var list = []
 	for x in range(start_x, start_x + BoardActive.preview_size):
@@ -124,6 +121,28 @@ func _find_clusters():
 		jobs.add(cube.collapse)
 	await jobs.all()
 	updated.emit()
+
+func _activate_cubes():
+	var jobs = Jobs.new()
+	for cube in main.get_cubes():
+		jobs.add(cube.activate)
+	await jobs.all()
+
+func _apply_active():
+	await _apply()
+	await _find_clusters()
+	await _activate_cubes()
+
+func _apply_preview():
+	_apply_active()
+		
+	for cube in preview.get_cubes():
+		preview.remove_cube(cube)
+		active.add_cube(cube)
+		cube.set_highlight(true)
+	
+	active.start_from_preview()
+	_new_preview()
 
 func _click_preview():
 	active.lock()

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm5eyptm8iq0c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4gtl"]
+transparency = 1
+albedo_color = Color(0.192157, 0.690196, 0.25098, 0.701961)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kxiuh"]
+material = SubResource("StandardMaterial3D_o4gtl")
+
+[sub_resource type="Curve" id="Curve_csjkg"]
+_data = [Vector2(0, 0), 0.0, 3.23289, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.83158, 0.0, 0, 0]
+point_count = 3
+
+[node name="acid" type="Node3D"]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(0.829252, 0, 0.558874, 0, 1, 0, -0.558874, 0, 0.829252, 0, 0, 0)
+amount = 32
+lifetime = 3.0
+mesh = SubResource("SphereMesh_kxiuh")
+emission_shape = 3
+emission_box_extents = Vector3(1, 0, 1)
+gravity = Vector3(0, 0, 0)
+scale_amount_curve = SubResource("Curve_csjkg")
