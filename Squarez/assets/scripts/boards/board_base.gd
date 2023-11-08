@@ -2,12 +2,14 @@ extends Node3D
 
 class_name BoardBase
 
+enum { MAIN, ACTIVE, PREVIEW }
+
 @export var coord: Vector2i
 
 const preview_size = 3
-var board_name: String
 var width: int
 var height: int
+var type := MAIN
 
 @onready var _pivot = $Pivot
 
@@ -16,23 +18,18 @@ func _hello():
 
 func add_object(cube: CubeBase):
 	_pivot.add_child(cube)
-	cube.board = self
 
 func add_cube(cube: CubeBase):
 	_pivot.add_child(cube)
-	cube.add_to_group(board_name)
-	cube.board = self
-
-func remove_cube(cube: CubeBase):
-	cube.remove_from_group(board_name)
-	cube.get_parent().remove_child(cube)
-
-## Оставляет Cube на доске, но исключает его из кубов
-func ignore_cube(cube: CubeBase):
-	cube.remove_from_group(board_name)
 
 func get_cubes() -> Array:
-	return get_tree().get_nodes_in_group(board_name)
+	var list = []
+	for i in range(_pivot.get_child_count()):
+		var child = _pivot.get_child(i)
+		if child is CubeBase:
+			if child.enabled:
+				list.append(child)
+	return list
 	
 func clear():
 	for cube in get_cubes():
@@ -53,3 +50,7 @@ func in_board(pos) -> bool:
 		return false
 	
 	return true
+
+func to_board_position(cube: CubeBase) -> Vector3:
+	var pos = cube.to_global(cube.position)
+	return _pivot.to_local(pos)

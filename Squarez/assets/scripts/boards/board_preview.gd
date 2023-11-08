@@ -5,7 +5,7 @@ extends BoardBase
 signal new_preview_after
 
 func _ready():
-	board_name = "Preview"
+	type = BoardBase.PREVIEW
 	width = 3
 	height = 3
 	

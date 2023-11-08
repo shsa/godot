@@ -10,7 +10,7 @@ var _start_figure_position = Vector3.ZERO
 var _locked := false
 
 func _ready():
-	board_name = "Active"
+	type = BoardBase.ACTIVE
 	width = 3
 	height = 3
 	
@@ -112,6 +112,16 @@ func _move(delta: Vector2):
 	if _locked: return
 
 	position = _start_figure_position + Vector3(delta.x, 0.0, delta.y)
+	
+	var jobs = Jobs.new()
+	var m = main.get_matrix()
+	for a_cube in get_cubes():
+		var m_cube = m.get_cube(a_cube.coord)
+		if m_cube != null:
+			jobs.add(func():
+				if await m_cube.touch(a_cube):
+					await a_cube.touch(m_cube))
+	await jobs.all()
 
 func _rotate():
 	if _locked: return

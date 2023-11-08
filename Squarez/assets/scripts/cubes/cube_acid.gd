@@ -2,9 +2,6 @@ extends CubeBase
 
 const ACID_PREFAB = preload("res://assets/prefabs/cubes/acid_place.tscn")
 
-func _ready():
-	pass
-
 func set_highlight(value):
 	$cube.set_highlight(value)
 
@@ -17,6 +14,7 @@ func collapse():
 	await tween.finished
 
 func post_collapse():
+	var board = get_board()
 	var m = board.get_matrix()
 	var jobs = Jobs.new()
 	for x in range(-1, 2):

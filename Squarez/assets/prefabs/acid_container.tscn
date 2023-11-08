@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxd8ruwlt15nw"]
 
 [ext_resource type="ArrayMesh" uid="uid://ciuigtccbu4em" path="res://assets/models/container.obj" id="1_fqy3p"]
-[ext_resource type="Material" path="res://assets/materials/acid.tres" id="2_1c2vg"]
-[ext_resource type="Script" path="res://assets/scripts/cubes/acid_container.gd" id="3_5uiwp"]
+[ext_resource type="Material" uid="uid://ohl3bjnu3fub" path="res://assets/materials/acid.tres" id="2_1c2vg"]
+[ext_resource type="Script" path="res://assets/scripts/acid_container.gd" id="3_6qqry"]
 [ext_resource type="ArrayMesh" uid="uid://7b3hohlnfgc0" path="res://assets/models/dome.obj" id="4_7be3p"]
 
 [node name="acid_container" type="MeshInstance3D"]
 mesh = ExtResource("1_fqy3p")
 surface_material_override/0 = ExtResource("2_1c2vg")
-script = ExtResource("3_5uiwp")
+script = ExtResource("3_6qqry")
 
 [node name="buble" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.446397, 0)

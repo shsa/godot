@@ -5,9 +5,6 @@ extends CubeBase
 func set_highlight(value):
 	$cube.set_highlight(value)
 
-func _ready():
-	pass
-
 func get_scores() -> int:
 	return 1
 

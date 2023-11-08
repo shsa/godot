@@ -79,7 +79,7 @@ func _can_apply() -> bool:
 func _apply():
 	var jobs := Jobs.new()
 	for cube in active.get_cubes():
-		active.remove_cube(cube)
+		cube.remove_from_board()
 		main.add_cube(cube)
 		cube.set_highlight(false)
 		jobs.add(cube.placed)
@@ -119,7 +119,7 @@ func _find_clusters():
 func _collapse_clusters(clusters: Array):
 	var jobs = Jobs.new()
 	for cube in clusters:
-		main.ignore_cube(cube)
+		cube.enabled = false
 		scores += cube.get_scores()
 		jobs.add(cube.collapse)
 	await jobs.all()
@@ -147,7 +147,7 @@ func _apply_preview():
 	_apply_active()
 		
 	for cube in preview.get_cubes():
-		preview.remove_cube(cube)
+		cube.remove_from_board()
 		active.add_cube(cube)
 		cube.set_highlight(true)
 	

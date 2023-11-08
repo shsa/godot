@@ -6,7 +6,7 @@ class_name BoardMain
 @onready var logic: BoardLogic = $Logic
 
 func _ready():
-	board_name = "main"
+	type = BoardBase.MAIN
 	width = 10
 	height = 14
 
