@@ -139,7 +139,7 @@ func _activate_cubes():
 
 func _apply_active():
 	await _apply()
-	var clusters = await _find_clusters()
+	var clusters = _find_clusters()
 	await _collapse_clusters(clusters)
 	await _activate_cubes()
 

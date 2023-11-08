@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwbwdrbtbjqhk"]
+
+[ext_resource type="Shader" path="res://outline2.gdshader" id="1_122jh"]
+
+[sub_resource type="Environment" id="Environment_txipl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p25l2"]
+render_priority = 0
+shader = ExtResource("1_122jh")
+shader_parameter/border_width = 0.115
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/pattern = null
+shader_parameter/line_number = null
+shader_parameter/line_sharpness = null
+shader_parameter/pulse = null
+shader_parameter/pulse_speed = null
+shader_parameter/line_movement = null
+shader_parameter/line_movement_speed = null
+shader_parameter/wave = null
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_o8n21"]
+next_pass = SubResource("ShaderMaterial_p25l2")
+
+[sub_resource type="BoxMesh" id="BoxMesh_q7ya6"]
+material = SubResource("ORMMaterial3D_o8n21")
+
+[sub_resource type="Environment" id="Environment_k4l7l"]
+glow_enabled = true
+glow_intensity = 2.23
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.944422, 0.328735, 0, -0.328735, 0.944422, 0, 0.817802, 2.07858)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.944422, 0.328735, 0, -0.328735, 0.944422, 0, 0.817802, 2.07858)
+environment = SubResource("Environment_txipl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_q7ya6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k4l7l")

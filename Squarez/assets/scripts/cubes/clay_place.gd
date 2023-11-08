@@ -2,13 +2,17 @@ extends CubeBase
 
 func touch(cube: CubeBase) -> bool:
 	enabled = false
-	cube.enabled = false
+	
+	var tween := create_tween()
+	var pos = get_board().to_board_position(cube)
+	get_board().add_cube(cube)
+	cube.position = Vector3(pos.x, 0, pos.z)
+	tween.tween_property(cube, "position", position, Global.CAPTURE_TIME)
 	
 	var jobs = Jobs.new()
-	jobs.add(cube.collapse)
+	jobs.add(tween.finished)
 	jobs.add(collapse)
 	await jobs.all()
-	cube.post_collapse()
 	post_collapse()
 	return true
 

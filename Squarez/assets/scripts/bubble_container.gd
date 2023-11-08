@@ -1,9 +1,10 @@
 extends MeshInstance3D
 
-class_name AcidContainer
+class_name BubbleContainer
 
 @onready var buble = $buble
 
+@export var material: Material
 @export var life_time: float = 5
 @export var max_count: int = 8
 @export var max_scale: float = 0.4
@@ -11,6 +12,10 @@ class_name AcidContainer
 var _queue = []
 
 func _ready():
+	if material != null:
+		set_surface_override_material(0, material)
+		buble.set_surface_override_material(0, material)
+
 	buble.visible = false
 	var _delta: float = life_time / max_count
 	var _time: float = 0
@@ -23,7 +28,7 @@ func _ready():
 		_spawn(f)
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if len(_queue) > 0:
 		_spawn(0)
 	pass

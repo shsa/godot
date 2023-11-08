@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwc4s0aaau4p0"]
+
+[ext_resource type="Shader" path="res://random_texture.gdshader" id="1_bdrka"]
+[ext_resource type="Texture2D" uid="uid://c74a414ir3k8n" path="res://wood.png" id="2_avjuk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7r0f3"]
+render_priority = 0
+shader = ExtResource("1_bdrka")
+shader_parameter/offset = Vector2(1.885, 0.87)
+shader_parameter/scale = 0.49
+shader_parameter/texture_albedo = ExtResource("2_avjuk")
+
+[sub_resource type="BoxMesh" id="BoxMesh_mg5at"]
+material = SubResource("ShaderMaterial_7r0f3")
+
+[node name="random_texture" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_mg5at")

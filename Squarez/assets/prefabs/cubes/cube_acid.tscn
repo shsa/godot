@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://b31v5o0k47fy3"]
 
 [ext_resource type="Script" path="res://assets/scripts/cubes/cube_acid.gd" id="1_o8tbd"]
-[ext_resource type="PackedScene" uid="uid://nt34tiqaoc3q" path="res://assets/prefabs/cubes/cube.tscn" id="2_dnoul"]
-[ext_resource type="PackedScene" uid="uid://bxd8ruwlt15nw" path="res://assets/prefabs/acid_container.tscn" id="3_t4tya"]
+[ext_resource type="PackedScene" uid="uid://ffifnf3wxbyg" path="res://assets/prefabs/cubes/cube.tscn" id="2_dnoul"]
+[ext_resource type="PackedScene" uid="uid://bxd8ruwlt15nw" path="res://assets/prefabs/bubble_container.tscn" id="3_t4tya"]
 
-[node name="Cube" type="Node3D"]
+[node name="cube" type="Node3D"]
 script = ExtResource("1_o8tbd")
 
 [node name="cube" parent="." instance=ExtResource("2_dnoul")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="acid_container" parent="cube" instance=ExtResource("3_t4tya")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0912551, 0)
+[node name="bubble_container" parent="cube" instance=ExtResource("3_t4tya")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.075, 0)
+skeleton = NodePath("")

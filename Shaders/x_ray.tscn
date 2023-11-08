@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://mnndte7xtukf"]
+
+[ext_resource type="Material" uid="uid://b35seixvbe7fq" path="res://xray_monochrome.tres" id="1_ym716"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gv665"]
+material = ExtResource("1_ym716")
+
+[sub_resource type="BoxMesh" id="BoxMesh_rpx2p"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108533, 0, -2.00497)
+mesh = SubResource("BoxMesh_gv665")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.533864)
+mesh = SubResource("BoxMesh_rpx2p")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.973964, -0.0958946, 0.205422, 0, 0.906131, 0.422998, -0.226702, -0.411985, 0.882539, 0.987587, 1.01523, 1.58049)

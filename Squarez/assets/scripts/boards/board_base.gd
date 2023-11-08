@@ -17,9 +17,11 @@ func _hello():
 	print("hello base")
 
 func add_object(cube: CubeBase):
+	cube.remove_from_board()
 	_pivot.add_child(cube)
 
 func add_cube(cube: CubeBase):
+	cube.remove_from_board()
 	_pivot.add_child(cube)
 
 func get_cubes() -> Array:
@@ -52,5 +54,5 @@ func in_board(pos) -> bool:
 	return true
 
 func to_board_position(cube: CubeBase) -> Vector3:
-	var pos = cube.to_global(cube.position)
+	var pos = cube.to_global(Vector3.ZERO)
 	return _pivot.to_local(pos)

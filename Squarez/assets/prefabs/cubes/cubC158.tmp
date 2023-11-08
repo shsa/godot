@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsxbfgxtmyled"]
+
+[ext_resource type="Script" path="res://assets/scripts/cubes/cube_acid.gd" id="1_t62sc"]
+[ext_resource type="PackedScene" uid="uid://nt34tiqaoc3q" path="res://assets/prefabs/cubes/cube.tscn" id="2_edqm2"]
+[ext_resource type="PackedScene" uid="uid://bxd8ruwlt15nw" path="res://assets/prefabs/bubble_container.tscn" id="3_tdits"]
+[ext_resource type="Material" uid="uid://b6v7muatl76i3" path="res://assets/materials/clay.tres" id="4_40pxd"]
+
+[node name="Cube" type="Node3D"]
+script = ExtResource("1_t62sc")
+
+[node name="cube" parent="." instance=ExtResource("2_edqm2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="bubble_container" parent="cube" instance=ExtResource("3_tdits")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0912551, 0)
+material = ExtResource("4_40pxd")

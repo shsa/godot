@@ -4,7 +4,8 @@
 		"cubes": {
 			"simple": 10,
 			"bomb": 0,
-			"acid": 10
+			"acid": 10,
+			"clay": 10
 		},
 		"items": [
 			{

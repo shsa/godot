@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm5eyptm8iq0c"]
 
 [ext_resource type="Script" path="res://assets/scripts/cubes/acid_place.gd" id="1_aicoc"]
-[ext_resource type="PackedScene" uid="uid://bxd8ruwlt15nw" path="res://assets/prefabs/acid_container.tscn" id="1_cqsso"]
+[ext_resource type="PackedScene" uid="uid://bxd8ruwlt15nw" path="res://assets/prefabs/bubble_container.tscn" id="1_cqsso"]
 
 [node name="acid" type="Node3D"]
 script = ExtResource("1_aicoc")
 
 [node name="container" parent="." instance=ExtResource("1_cqsso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.352537, 0)
 max_scale = 0.1

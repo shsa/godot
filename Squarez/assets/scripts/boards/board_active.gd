@@ -119,8 +119,8 @@ func _move(delta: Vector2):
 		var m_cube = m.get_cube(a_cube.coord)
 		if m_cube != null:
 			jobs.add(func():
-				if await m_cube.touch(a_cube):
-					await a_cube.touch(m_cube))
+				var f = await m_cube.touch(a_cube)
+				if not f: await a_cube.touch(m_cube))
 	await jobs.all()
 
 func _rotate():
