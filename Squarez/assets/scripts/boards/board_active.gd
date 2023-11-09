@@ -48,6 +48,7 @@ func add_cube(cube: CubeBase):
 	cube.position.x = cube.coord.x
 	cube.position.y = 0
 	cube.position.z = cube.coord.y
+	cube.set_highlight(true)
 
 func get_cubes() -> Array:
 	for cube in super.get_cubes():
@@ -114,9 +115,9 @@ func _move(delta: Vector2):
 	position = _start_figure_position + Vector3(delta.x, 0.0, delta.y)
 	
 	var jobs = Jobs.new()
-	var m = main.get_matrix()
+	main.update_matrix()
 	for a_cube in get_cubes():
-		var m_cube = m.get_cube(a_cube.coord)
+		var m_cube = main.get_cube(a_cube.coord)
 		if m_cube != null:
 			jobs.add(func():
 				var f = await m_cube.touch(a_cube)

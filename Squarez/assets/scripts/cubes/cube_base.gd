@@ -21,8 +21,9 @@ func get_board() -> BoardBase:
 	return parent
 
 func remove_from_board():
-	if get_parent() != null:
-		get_parent().remove_child(self)
+	var _board = get_board()
+	if _board != null:
+		_board.remove_cube(self)
 
 func set_highlight(value):
 	highlight = value

@@ -13,6 +13,6 @@ func _ready():
 func set_highlight(value):
 	var material = _mesh.get_surface_override_material(0)
 	if value:
-		material.set_shader_parameter("highlight", 0.2)
+		material.set_shader_parameter("highlight", 0.3)
 	else:
 		material.set_shader_parameter("highlight", 0.0)

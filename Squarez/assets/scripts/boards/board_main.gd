@@ -45,7 +45,8 @@ func add_cube(cube: CubeBase):
 	cube.position.x = cube.coord.x
 	cube.position.y = 0
 	cube.position.z = cube.coord.y
-
+	_matrix[cube.coord] = cube
+	cube.set_highlight(false)
 
 func _hello():
 	print("hello main")

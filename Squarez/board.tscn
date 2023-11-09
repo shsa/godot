@@ -84,6 +84,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.59055, -0.082, 14.322
 script = ExtResource("3_04scc")
 main = NodePath("../..")
 input = NodePath("../../Input")
+coord = null
 
 [node name="Mesh" type="MeshInstance3D" parent="Pivot/Preview"]
 mesh = SubResource("BoxMesh_7fqq2")

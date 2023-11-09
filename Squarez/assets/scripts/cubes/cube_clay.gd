@@ -15,12 +15,12 @@ func collapse():
 
 func post_collapse():
 	var board = get_board()
-	var m = board.get_matrix()
+	board.update_matrix()
 	var jobs = Jobs.new()
 	for x in range(-1, 2):
 		for y in range(-1, 2):
 			var pos = Vector2i(coord.x + x, coord.y + y)
-			var cube = m.get_cube(pos)
+			var cube = board.get_cube(pos)
 			if cube == null and board.in_board(pos):
 				cube = CLAY_PREFAB.instantiate()
 				cube.coord = pos

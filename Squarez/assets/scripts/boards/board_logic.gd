@@ -55,12 +55,11 @@ func _new_preview():
 	pass
 
 func _can_apply() -> bool:
-	var _matrix = main.get_matrix()
 	var _errors = []
 	for cube in active.get_cubes():
-		if not _matrix.contains(cube.coord):
+		if not main.in_board(cube.coord):
 			_errors.append(cube)
-		elif _matrix.get_cube(cube.coord) != null:
+		elif main.get_cube(cube.coord) != null:
 			_errors.append(cube)
 		pass
 
@@ -81,17 +80,16 @@ func _apply():
 	for cube in active.get_cubes():
 		cube.remove_from_board()
 		main.add_cube(cube)
-		cube.set_highlight(false)
 		jobs.add(cube.placed)
 	await jobs.all()
 	return true
 
-func _select_cluster(matrix: CubeMatrix, start_x: int, start_y: int) -> Array:
+func _select_cluster(start_x: int, start_y: int) -> Array:
 	var list = []
 	for x in range(start_x, start_x + BoardActive.preview_size):
 		for y in range(start_y, start_y + BoardActive.preview_size):
 			var pos = Vector2i(x, y)
-			var cube = matrix.get_cube(pos)
+			var cube = main.get_cube(pos)
 			if cube == null: 
 				return []
 			if cube.get_scores() == 0: 
@@ -103,11 +101,10 @@ func _select_cluster(matrix: CubeMatrix, start_x: int, start_y: int) -> Array:
 
 func _find_clusters():
 	var list = []
-	var m = main.get_matrix()
 	var _hash = {}
-	for x in range(m.width):
-		for y in range(m.height):
-			for cube in _select_cluster(m, x, y):
+	for x in range(main.width):
+		for y in range(main.height):
+			for cube in _select_cluster(x, y):
 				if not _hash.has(cube.coord):
 					_hash[cube.coord] = true
 					list.append(cube)
@@ -139,8 +136,10 @@ func _activate_cubes():
 
 func _apply_active():
 	await _apply()
+	main.update_matrix()
 	var clusters = _find_clusters()
 	await _collapse_clusters(clusters)
+	main.update_matrix()
 	await _activate_cubes()
 
 func _apply_preview():
@@ -149,13 +148,13 @@ func _apply_preview():
 	for cube in preview.get_cubes():
 		cube.remove_from_board()
 		active.add_cube(cube)
-		cube.set_highlight(true)
 	
 	active.start_from_preview()
 	_new_preview()
 
 func _click_preview():
 	active.lock()
+	main.update_matrix()
 	if await _can_apply():
 		_apply_preview()
 	active.unlock()
