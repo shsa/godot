@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhg4yj8r33wyu"]
+
+[ext_resource type="PackedScene" uid="uid://ffifnf3wxbyg" path="res://assets/prefabs/cubes/cube.tscn" id="1_2fqaq"]
+[ext_resource type="PackedScene" uid="uid://b3lvfc1tdaxn8" path="res://assets/prefabs/rocket.tscn" id="2_k30kp"]
+
+[node name="cube_rocket" type="Node3D"]
+
+[node name="cube" parent="." instance=ExtResource("1_2fqaq")]
+
+[node name="rocket" parent="." instance=ExtResource("2_k30kp")]
