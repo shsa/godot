@@ -10,6 +10,9 @@ var enabled: bool = true
 func _ready():
 	pass
 
+func init():
+	pass
+
 func touch(_cube: CubeBase) -> bool:
 	await get_tree().create_timer(0).timeout
 	return false
@@ -19,6 +22,12 @@ func get_board() -> BoardBase:
 	if parent != null:
 		parent = parent.get_parent()
 	return parent
+
+func get_dir() -> Vector3:
+	var p0 = to_global(Vector3.ZERO)
+	var p1 = to_global(Vector3.BACK)
+	var d = p1 - p0
+	return d
 
 func remove_from_board():
 	var _board = get_board()

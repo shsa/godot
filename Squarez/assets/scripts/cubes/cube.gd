@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Cube
+
 @onready var _mesh = $mesh
 
 func _ready():

@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhg4yj8r33wyu"]
+[gd_scene load_steps=4 format=3 uid="uid://dhg4yj8r33wyu"]
 
 [ext_resource type="PackedScene" uid="uid://ffifnf3wxbyg" path="res://assets/prefabs/cubes/cube.tscn" id="1_2fqaq"]
+[ext_resource type="Script" path="res://assets/scripts/cubes/cube_rocket.gd" id="1_4slap"]
 [ext_resource type="PackedScene" uid="uid://b3lvfc1tdaxn8" path="res://assets/prefabs/rocket.tscn" id="2_k30kp"]
 
 [node name="cube_rocket" type="Node3D"]
+script = ExtResource("1_4slap")
 
 [node name="cube" parent="." instance=ExtResource("1_2fqaq")]
 

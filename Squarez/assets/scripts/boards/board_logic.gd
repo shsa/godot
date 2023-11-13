@@ -50,6 +50,7 @@ func _new_preview():
 		var cube = _new_cube(collection.next_cube())
 		cube.coord = coord
 		preview.add_cube(cube)
+		cube.init()
 		pass
 	preview.new_preview_after.emit()
 	pass
@@ -80,6 +81,7 @@ func _apply():
 	for cube in active.get_cubes():
 		cube.remove_from_board()
 		main.add_cube(cube)
+		cube.rotation = active.rotation
 		jobs.add(cube.placed)
 	await jobs.all()
 	return true
