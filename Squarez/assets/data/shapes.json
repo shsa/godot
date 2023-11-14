@@ -34,11 +34,19 @@
 				]
 			},
 			{
-				"count": 1,
+				"count": 0,
 				"lines": [
 					"sss",
 					"sss",
 					"sss"
+				]
+			},
+			{
+				"count": 1,
+				"lines": [
+					"ss.",
+					"ss.",
+					"ss."
 				]
 			}
 		]

@@ -9,7 +9,7 @@ albedo_texture = ExtResource("2_vydca")
 metallic = 0.42
 roughness = 0.63
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n20cq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvm1c"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.968627, 0.956863, 0.156863, 1)
@@ -20,7 +20,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_ql2iw"]
-material = SubResource("StandardMaterial3D_n20cq")
+material = SubResource("StandardMaterial3D_bvm1c")
 size = Vector2(0.1, 0.1)
 
 [sub_resource type="Curve" id="Curve_hhxbv"]

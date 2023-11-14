@@ -53,7 +53,15 @@ func collapse():
 	pass
 
 func post_collapse():
-	queue_free()
+	destroy()
 
 func explode():
+	enabled = false
+	var tween := create_tween()
+	tween.tween_property(self, "scale", Vector3.ZERO, Global.COLLAPSE_TIME)
+	await tween.finished
+	destroy()
+
+func destroy():
+	remove_from_board()
 	queue_free()

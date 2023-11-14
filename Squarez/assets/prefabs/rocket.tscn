@@ -1,7 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3lvfc1tdaxn8"]
+[gd_scene load_steps=6 format=3 uid="uid://b3lvfc1tdaxn8"]
 
 [ext_resource type="Script" path="res://assets/scripts/rocket.gd" id="1_88mf3"]
 [ext_resource type="ArrayMesh" uid="uid://dd2unrmhmuq1k" path="res://assets/models/rocket.obj" id="1_yfrop"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n20cq"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.968627, 0.956863, 0.156863, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_l1gw8"]
+material = SubResource("StandardMaterial3D_n20cq")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_moxi1"]
+_data = [Vector2(0, 0), 1.4, 0.0, 0, 0, Vector2(0.233438, 0.715789), 2.59532, 2.59532, 0, 0, Vector2(0.504732, 1), 0.0, 0.0, 0, 0, Vector2(0.801262, 0.673684), -2.1762, -2.1762, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [node name="rocket" type="Node3D"]
 script = ExtResource("1_88mf3")
@@ -9,3 +27,22 @@ script = ExtResource("1_88mf3")
 [node name="model" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.145, 0, 0, 0, -6.33815e-09, -0.145, 0, 0.145, -6.33815e-09, 0, 0.466336, -0.119425)
 mesh = ExtResource("1_yfrop")
+
+[node name="particles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1.99994, -0.0028536, 0.0150582, 0.00269848, 1.99989, 0.0205819, -0.0150895, -0.0205646, 1.99984, 0.0121053, 0.465595, -0.474137)
+visible = false
+amount = 20
+lifetime = 0.14
+mesh = SubResource("QuadMesh_l1gw8")
+emission_shape = 1
+emission_sphere_radius = 0.23
+gravity = Vector3(0, 0, 0)
+linear_accel_max = 4.85
+radial_accel_min = 1.0
+radial_accel_max = 2.0
+scale_amount_min = 0.1
+scale_amount_curve = SubResource("Curve_moxi1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="particles"]
+visible = false
+light_color = Color(1, 1, 0.176471, 1)
