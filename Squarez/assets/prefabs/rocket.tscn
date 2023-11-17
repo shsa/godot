@@ -1,48 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3lvfc1tdaxn8"]
+[gd_scene load_steps=9 format=3 uid="uid://d3iae5plr4w1p"]
 
 [ext_resource type="Script" path="res://assets/scripts/rocket.gd" id="1_88mf3"]
 [ext_resource type="ArrayMesh" uid="uid://dd2unrmhmuq1k" path="res://assets/models/rocket.obj" id="1_yfrop"]
+[ext_resource type="Texture2D" uid="uid://c0musucnplh6c" path="res://assets/textures/rocket.png" id="3_far0q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n20cq"]
-shading_mode = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ty43h"]
+albedo_texture = ExtResource("3_far0q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fnt4"]
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.968627, 0.956863, 0.156863, 1)
-billboard_mode = 3
+albedo_color = Color(1, 1, 0.313726, 1)
+billboard_mode = 1
 billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_l1gw8"]
-material = SubResource("StandardMaterial3D_n20cq")
-size = Vector2(0.1, 0.1)
+[sub_resource type="QuadMesh" id="QuadMesh_yar2n"]
+material = SubResource("StandardMaterial3D_4fnt4")
+size = Vector2(0.2, 0.2)
 
-[sub_resource type="Curve" id="Curve_moxi1"]
-_data = [Vector2(0, 0), 1.4, 0.0, 0, 0, Vector2(0.233438, 0.715789), 2.59532, 2.59532, 0, 0, Vector2(0.504732, 1), 0.0, 0.0, 0, 0, Vector2(0.801262, 0.673684), -2.1762, -2.1762, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 5
+[sub_resource type="Curve" id="Curve_ejhev"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.181319, 0.873684), 1.19737, 1.19737, 0, 0, Vector2(0.813187, 0.852632), -1.06433, -1.06433, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_ie86n"]
+offsets = PackedFloat32Array(0.013245, 0.966887)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [node name="rocket" type="Node3D"]
 script = ExtResource("1_88mf3")
 
 [node name="model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.145, 0, 0, 0, -6.33815e-09, -0.145, 0, 0.145, -6.33815e-09, 0, 0.466336, -0.119425)
+transform = Transform3D(0.215, 0, 0, 0, -9.39795e-09, -0.215, 0, 0.215, -9.39795e-09, 0, 0.466336, -0.390697)
 mesh = ExtResource("1_yfrop")
+surface_material_override/0 = SubResource("StandardMaterial3D_ty43h")
 
-[node name="particles" type="CPUParticles3D" parent="."]
-transform = Transform3D(1.99994, -0.0028536, 0.0150582, 0.00269848, 1.99989, 0.0205819, -0.0150895, -0.0205646, 1.99984, 0.0121053, 0.465595, -0.474137)
+[node name="particles" type="CPUParticles3D" parent="model"]
+transform = Transform3D(6.89655, 0, 0, 0, -1.97972, -6.6063, 0, 6.6063, -1.97972, 0.0934153, 0.107368, 0.0262868)
 visible = false
-amount = 20
-lifetime = 0.14
-mesh = SubResource("QuadMesh_l1gw8")
-emission_shape = 1
-emission_sphere_radius = 0.23
+amount = 16
+lifetime = 0.5
+mesh = SubResource("QuadMesh_yar2n")
+direction = Vector3(0, 0, 1)
+spread = 15.0
 gravity = Vector3(0, 0, 0)
-linear_accel_max = 4.85
-radial_accel_min = 1.0
-radial_accel_max = 2.0
-scale_amount_min = 0.1
-scale_amount_curve = SubResource("Curve_moxi1")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="particles"]
-visible = false
-light_color = Color(1, 1, 0.176471, 1)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+scale_amount_curve = SubResource("Curve_ejhev")
+color_ramp = SubResource("Gradient_ie86n")

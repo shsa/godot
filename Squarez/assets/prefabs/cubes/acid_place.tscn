@@ -5,6 +5,8 @@
 
 [node name="acid" type="Node3D"]
 script = ExtResource("1_aicoc")
+coord = null
+highlight = null
 
 [node name="container" parent="." instance=ExtResource("1_cqsso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.352537, 0)
