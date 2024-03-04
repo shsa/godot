@@ -1,11 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://d3iae5plr4w1p"]
 
 [ext_resource type="Script" path="res://assets/scripts/rocket.gd" id="1_88mf3"]
-[ext_resource type="ArrayMesh" uid="uid://dd2unrmhmuq1k" path="res://assets/models/rocket.obj" id="1_yfrop"]
-[ext_resource type="Texture2D" uid="uid://c0musucnplh6c" path="res://assets/textures/rocket.png" id="3_far0q"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ty43h"]
-albedo_texture = ExtResource("3_far0q")
+[ext_resource type="ArrayMesh" uid="uid://dgjh8rgui5as2" path="res://assets/models/rocket_cone.obj" id="2_qjc1m"]
+[ext_resource type="ArrayMesh" uid="uid://dsh64rjpb0pk0" path="res://assets/models/rocket_cilinder.obj" id="3_itgxb"]
+[ext_resource type="Material" uid="uid://dwftv8nnqgfxp" path="res://assets/materials/rocket.tres" id="3_vma22"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fnt4"]
 vertex_color_use_as_albedo = true
@@ -28,13 +26,23 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 [node name="rocket" type="Node3D"]
 script = ExtResource("1_88mf3")
 
-[node name="model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.215, 0, 0, 0, -9.39795e-09, -0.215, 0, 0.215, -9.39795e-09, 0, 0.466336, -0.390697)
-mesh = ExtResource("1_yfrop")
-surface_material_override/0 = SubResource("StandardMaterial3D_ty43h")
+[node name="model" type="Node3D" parent="."]
+transform = Transform3D(0.165, 0, 0, 0, -7.21238e-09, -0.165, 0, 0.165, -7.21238e-09, 0, 0.633345, -0.12374)
+
+[node name="cone" type="MeshInstance3D" parent="model"]
+transform = Transform3D(1.02541, 0, 0, 0, 1.02541, 0, 0, 0, 1.02541, 0, 1.51231, 0)
+mesh = ExtResource("2_qjc1m")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_vma22")
+
+[node name="cilinder" type="MeshInstance3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, 2.2741, 0, 0, 0, 1, 0, 0.021581, 0)
+mesh = ExtResource("3_itgxb")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_vma22")
 
 [node name="particles" type="CPUParticles3D" parent="model"]
-transform = Transform3D(6.89655, 0, 0, 0, -1.97972, -6.6063, 0, 6.6063, -1.97972, 0.0934153, 0.107368, 0.0262868)
+transform = Transform3D(1.48276, 0, 0, 0, -6.48135e-08, -1.48276, 0, 1.48276, -6.48135e-08, 0, -1.00475, 0)
 visible = false
 amount = 16
 lifetime = 0.5
@@ -43,6 +51,6 @@ direction = Vector3(0, 0, 1)
 spread = 15.0
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 1.0
-initial_velocity_max = 2.0
+initial_velocity_max = 10.0
 scale_amount_curve = SubResource("Curve_ejhev")
 color_ramp = SubResource("Gradient_ie86n")

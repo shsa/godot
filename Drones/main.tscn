@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmq4o664igkxv"]
+
+[ext_resource type="Script" path="res://HexGrid.gd" id="1_loptm"]
+[ext_resource type="Material" uid="uid://b25gbm2k106ke" path="res://assets/materials/noise_material.tres" id="2_47bns"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_abqjj"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_loptm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.997205, 0.0595432, -0.0451368, -0.0309434, 0.878967, 0.475878, 0.0680091, -0.473151, 0.878352, 0, 10.2938, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_abqjj")
+surface_material_override/0 = ExtResource("2_47bns")
