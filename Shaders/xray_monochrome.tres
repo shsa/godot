@@ -1,25 +1,15 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b35seixvbe7fq"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b35seixvbe7fq"]
 
 [ext_resource type="Shader" path="res://xray_monochrome.gdshader" id="1_gv7tj"]
-[ext_resource type="Material" uid="uid://b5mipjwrbuboo" path="res://standard_shaded_material.tres" id="1_loeek"]
+[ext_resource type="Shader" path="res://simple.gdshader" id="1_vrqdb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3a58b"]
+render_priority = 1
+shader = ExtResource("1_vrqdb")
+shader_parameter/color = Color(0.588235, 0.619608, 0, 0.482353)
 
 [resource]
 render_priority = 0
-next_pass = ExtResource("1_loeek")
+next_pass = SubResource("ShaderMaterial_3a58b")
 shader = ExtResource("1_gv7tj")
-shader_parameter/enable_glow = false
-shader_parameter/enable_lines = false
-shader_parameter/enable_flicker = false
-shader_parameter/enable_pattern = false
-shader_parameter/base_color = Color(0.627451, 0, 0, 1)
-shader_parameter/glow_color = Color(0.5, 0.75, 1, 1)
-shader_parameter/glow_itensity = 4.5
-shader_parameter/glow_amount = 4.5
-shader_parameter/flickering = 0.55
-shader_parameter/line_width = 0.005
-shader_parameter/line_blur = 0.2
-shader_parameter/line_speed = 0.02
-shader_parameter/straight_lines = true
-shader_parameter/interrupt_width = 0.5
-shader_parameter/interrupt_blur = 0.25
-shader_parameter/interrupt_speed = 0.2
+shader_parameter/color = Color(1, 0, 0, 1)

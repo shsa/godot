@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://de1summxvf47c"]
+
+[ext_resource type="PackedScene" uid="uid://sfrfosuimdlo" path="res://assets/map/80001a22-0000-7200-b63f-84710c7967bb.glb" id="1_0mcho"]
+
+[node name="Map" type="Node3D"]
+
+[node name="TerrainScene" parent="." instance=ExtResource("1_0mcho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22382, -1.34607, 1.07275)

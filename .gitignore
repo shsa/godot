@@ -4,3 +4,7 @@
 .vscode/
 /Godot_v4.1.1-stable_win64.exe
 /Godot_v4.1.1-stable_win64_console.exe
+/DroneLibrary/bin/Debug/net6.0
+/DroneLibrary/obj/Debug/net6.0
+/DroneLibrary/obj
+/Drones2/.vs/Drones2/DesignTimeBuild/*.v2
