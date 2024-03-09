@@ -24,7 +24,7 @@ public partial class CameraMinecraftNavigator : Camera3D
     {
         _timer += delta;
 
-        var speed = 1.0f;
+        var speed = 0.2f;
 
         var move = new Vector3(0, 0, 0);
         if (Input.IsActionPressed("move_forward"))

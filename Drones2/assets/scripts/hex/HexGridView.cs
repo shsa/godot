@@ -1,9 +1,6 @@
 ﻿using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public partial class HexGridView : Node3D
 {
@@ -12,7 +9,7 @@ public partial class HexGridView : Node3D
 
     private Dictionary<HexGridTile, MultiMeshInstance3D> _tileCache = new Dictionary<HexGridTile, MultiMeshInstance3D>();
     private Mesh _mesh;
-    private float _meshScaleH = 1.0f;
+    private Vector3 _meshScale = Vector3.One;
 
     private MeshInstance3D _selected = null;
     
@@ -31,12 +28,15 @@ public partial class HexGridView : Node3D
     float markerScale = 1.0f;
     public override void _Ready()
     {
+        //var list = Geometry3D.SegmentIntersectsCylinder(new Vector3(-10, 1, 0), new Vector3(10, 1, 0), 10f, 1f);
+
         _grid = new HexGrid(100);
         _heightMap = new HeightMap();
 
         _mesh = ResourceLoader.Load<Mesh>("res://assets/models/hex.obj");
         var bounds = _mesh.GetAabb();
-        _meshScaleH = 1.0f / Mathf.Max(bounds.Size.X, bounds.Size.Z);
+        var _meshScaleH = 1.0f / Mathf.Max(bounds.Size.X, bounds.Size.Z);
+        _meshScale = new Vector3(_meshScaleH, _meshScaleH, _meshScaleH);
 
         var mi = (MeshInstance3D)Marker;
         var m = mi.Mesh;
@@ -48,8 +48,8 @@ public partial class HexGridView : Node3D
 
         _selected = new MeshInstance3D();
         _selected.Mesh = _mesh;
-        _selected.Scale = new Vector3(1.1f, 1.1f, 1.1f);
-        _selected.Position = new Vector3(0, 20, 0);
+        _selected.Scale = _meshScale * 1.1f;
+        _selected.Position = new Vector3(0, 11, 0);
         _selected.MaterialOverride = ResourceLoader.Load<Material>("res://assets/materials/hex_selected_material.tres");
         AddChild(_selected);
         //_selected.Visible = false;
@@ -63,8 +63,9 @@ public partial class HexGridView : Node3D
         {
             k += _heightMap.GetHeight(v);
         }
-        k = (int)Mathf.RoundToInt(k / 7 * 40);
+        k = k / 7 * 40;
         return k;
+        //return 0;
     }
 
 
@@ -89,6 +90,8 @@ public partial class HexGridView : Node3D
         {
             if (!_tileCache.TryGetValue(_tile, out var _tileView))
             {
+                _grid.DebugDrawHex(_tile.Offset, Colors.Blue);
+
                 var mm = new MultiMesh();
                 mm.TransformFormat = MultiMesh.TransformFormatEnum.Transform3D;
                 mm.InstanceCount = _grid.TileSize * _grid.TileSize;
@@ -99,14 +102,12 @@ public partial class HexGridView : Node3D
                 {
                     var k = GetHeight(pos);
 
-                    var transform = new Transform3D(Transform.Basis, new Vector3(pos.X, k, pos.Y) * Scale);
-                    transform.Basis.X = new Vector3(transform.Basis.X.X * _meshScaleH, 0, 0);
-                    transform.Basis.Z = new Vector3(0, 0, transform.Basis.Z.Z * _meshScaleH);
-                    transform.Basis.Y = new Vector3(0, transform.Basis.Y.Y, 0);
+                    var transform = new Transform3D(Transform.Basis, new Vector3(pos.X, k, pos.Y));
+                    transform = transform.ScaledLocal(_meshScale);
                     mm.SetInstanceTransform(i, transform);
                     i++;
                 }
-
+                 
                 _tileView = new MultiMeshInstance3D();
                 _tileView.Multimesh = mm;
                 _tileCache.Add(_tile, _tileView);
@@ -137,9 +138,9 @@ public partial class HexGridView : Node3D
                 DebugDraw.DefaultTransform = Transform;
                 //DebugDraw.Add(new DebugDraw.Line(new Vector3(center_x, 0, center_z), new Vector3(point1.X, 0, point1.Y), Colors.Red));
 
-                var grid_point1 = new Vector2(point1.X / Scale.X, point1.Y / Scale.Z);
+                var grid_point1 = point1;
                 var point0 = new Vector2(center_x, center_z);
-                var grid_point0 = new Vector2(point0.X / Scale.X, point0.Y / Scale.Z);
+                var grid_point0 = point0;
 
                 var list = _grid.SelectHexFromLine(grid_point0, grid_point1);
 
@@ -148,15 +149,15 @@ public partial class HexGridView : Node3D
                 var rayDirection = Camera.ProjectRayNormal(mousePosition);
 
 
-                foreach (var item in list )
+                foreach (var item in list)
                 {
-                    if (IntersectCylinder(item, rayOrigin, rayDirection))
+                    if (IntersectCylinder(item, rayOrigin, rayDirection * 100))
                     {
-                        _grid.DebugDrawHex(item, Colors.Azure, 1);
+                        _grid.DebugDrawHex(item, Colors.Azure, 0.1f);
                         var p = new Vector3(item.X, 0, item.Y);
-                        p.Y = GetHeight(item) * 2;
+                        p.Y = GetHeight(item) + 0.1f;
 
-                          _selected.Position = p;
+                        _selected.Position = p;
                         _selected.Visible = true;
                         break;
                     }
@@ -168,6 +169,34 @@ public partial class HexGridView : Node3D
 
     bool IntersectCylinder(Vector2 pixel, Vector3 rayOrigin, Vector3 rayDirection)
     {
+        var list = new Godot.Collections.Array<Plane>();
+
+        for (var i = 0; i < 6; i++)
+        {
+            var pos = new Vector3(pixel.X + _grid.hex_plane_origin[i].X, 0, pixel.Y + _grid.hex_plane_origin[i].Y);
+            var normal = new Vector3(_grid.hex_normals[i].X, 0, _grid.hex_normals[i].Y);
+            var plane = new Plane(normal, pos);
+            list.Add(plane);
+        }
+        {
+            var k = GetHeight(pixel);
+            var plane = new Plane(new Vector3(0, 1, 0), new Vector3(pixel.X, k, pixel.Y));
+            list.Add(plane);
+        }
+
+        var result = Geometry3D.SegmentIntersectsConvex(rayOrigin, rayOrigin + rayDirection, list);
+        return result.Length > 0;
+
+        /*
+
+        foreach (var p in pp)
+        {
+            var plane = new Plane()
+        
+        }
+
+        Geometry3D.SegmentIntersectsConvex(rayOrigin, rayOrigin + rayDirection, )
+        
         var k = GetHeight(pixel);
         var kv = new Vector3(0, k, 0);
 
@@ -188,6 +217,7 @@ public partial class HexGridView : Node3D
         var pixel3 = new Vector3(pixel.X, 0, pixel.Y) * Transform + kv;
         var lenSqr = (point.Value - pixel3).LengthSquared();
         return lenSqr <= (new Vector3(1, 0, 0) * Transform).LengthSquared();
+        */
     }
 
     public Vector2? FindCameraRayIntersection()

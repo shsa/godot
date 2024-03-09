@@ -17,14 +17,14 @@ public class HexGridTile : IEnumerable<Vector2>
 
     public IEnumerator<Vector2> GetEnumerator()
     {
-        var x = Offset.X - Grid.TileSize * Grid.Long + Grid.Long;
-        var y = Offset.Y - Grid.TileSize * Grid.Short * 3 / 2 + Grid.Short * 2;
+        var x = Offset.X - (Grid.TileSize - 1) * Grid.Short;
+        var y = Offset.Y - (Grid.TileSize - 1) * Grid.Long * 3;
         var list = new List<Vector2>();
         for (int j = 0; j < Grid.TileSize; j++)
         {
             for (int i = 0; i < Grid.TileSize; i++)
             {
-                list.Add(new Vector2(x + i * 2 * Grid.Short + (j % 2 == 0 ? Grid.Short : 0), y + j * 3 * Grid.Long));
+                list.Add(new Vector2(x + i * 2 * Grid.Short + (j % 2 == 0 ? 0 : Grid.Short), y + j * 3 * Grid.Long));
             }
         }
         return list.GetEnumerator();

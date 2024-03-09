@@ -12,7 +12,6 @@
 [sub_resource type="Environment" id="Environment_0p08k"]
 background_color = Color(1, 1, 1, 1)
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 4.03
 fog_light_color = Color(0.654902, 0.552941, 0.607843, 1)
 volumetric_fog_density = 0.0
 volumetric_fog_length = 5.0
@@ -36,7 +35,6 @@ transform = Transform3D(0.911044, -0.34657, -0.223358, 0, -0.541723, 0.840557, -
 light_energy = 0.5
 
 [node name="GridView" type="Node3D" parent="." node_paths=PackedStringArray("Camera", "Marker")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("3_ogrjs")
 Camera = NodePath("../Camera3D")
 Marker = NodePath("Box")

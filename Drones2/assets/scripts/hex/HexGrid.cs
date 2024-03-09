@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 
+// https://habr.com/ru/articles/557496/
 public class HexGrid
 {
     // матрица базиса вспомогательной сетки
@@ -14,7 +15,8 @@ public class HexGrid
     private float _tileWidth;
     private float _tileHeight;
 
-    private Vector2[] _hex_normals = new Vector2[6];
+    public Vector2[] hex_normals = new Vector2[6];
+    public Vector2[] hex_plane_origin = new Vector2[6];
 
     public float Short;
     public float Long;
@@ -41,12 +43,19 @@ public class HexGrid
         _hex_basis.Y = _grid_basis.X + _grid_basis.Y * 3;
         TileSize = tileSize;
 
-        _hex_normals[0] = new Vector2(-Short, -4 * Long).Normalized();
-        _hex_normals[1] = new Vector2(Short, -4 * Long).Normalized();
-        _hex_normals[2] = new Vector2(Short, 0).Normalized();
-        _hex_normals[3] = new Vector2(Short, 4 * Long).Normalized();
-        _hex_normals[4] = new Vector2(-Short, 4 * Long).Normalized();
-        _hex_normals[5] = new Vector2(-Short, 0).Normalized();
+        hex_plane_origin[0] = new Vector2(-Short * 0.5f, -Long * 1.5f);
+        hex_plane_origin[1] = new Vector2(Short * 0.5f, -Long * 1.5f);
+        hex_plane_origin[2] = new Vector2(Short, 0);
+        hex_plane_origin[3] = new Vector2(Short * 0.5f, Long * 1.5f).Normalized();
+        hex_plane_origin[4] = new Vector2(-Short * 0.5f, Long * 1.5f).Normalized();
+        hex_plane_origin[5] = new Vector2(-Short, 0).Normalized();
+
+        hex_normals[0] = hex_plane_origin[0].Normalized();
+        hex_normals[1] = hex_plane_origin[1].Normalized();
+        hex_normals[2] = hex_plane_origin[2].Normalized();
+        hex_normals[3] = hex_plane_origin[3].Normalized();
+        hex_normals[4] = hex_plane_origin[4].Normalized();
+        hex_normals[5] = hex_plane_origin[5].Normalized();
     }
 
     public Vector2 Cell2Pixel(Vector2 cell)
@@ -139,9 +148,9 @@ public class HexGrid
     public bool IntersectHexWithRay(Vector2 pixel, Vector2 ray_origin, Vector2 ray_direction)
     {
         var pp = GetHexVerticesFromPixel(pixel);
-        for (int i = 0; i < _hex_normals.Length; i++)
+        for (int i = 0; i < hex_normals.Length; i++)
         {
-            if (_hex_normals[i].Dot(ray_direction) < 0)
+            if (hex_normals[i].Dot(ray_direction) < 0)
             {
                 //DebugDrawLine(pixel, pixel + _hex_normals[i], Colors.Orange);
                 var p0 = pp[i];
