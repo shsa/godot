@@ -8,11 +8,15 @@ public partial class main : Node3D
 	public MeshInstance3D meshInstance { get; set; }
 
 	[Export]
+	public HexGridView GridView { get; set; }
+
+	[Export]
 	public int MyExportedProperty { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+        /*
 		var mesh = ResourceLoader.Load<Mesh>("res://assets/models/hex.obj");
 		var mm = new MultiMesh();
 		mm.TransformFormat = MultiMesh.TransformFormatEnum.Transform3D;
@@ -31,6 +35,11 @@ public partial class main : Node3D
 		var mmi = new MultiMeshInstance3D();
 		mmi.Multimesh = mm;
 		AddChild(mmi);
+		*/
+
+        //var _grid = ResourceLoader.Load<HexGridView>("res://assets/prefabs/GridView.tscn");
+        //AddChild(_grid);
+        GridView.Window = new Rect2(-10, -10, 20, 20);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

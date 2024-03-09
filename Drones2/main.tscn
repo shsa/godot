@@ -1,20 +1,65 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6ka3mt3ti88q"]
+[gd_scene load_steps=10 format=3 uid="uid://c6ka3mt3ti88q"]
 
 [ext_resource type="Script" path="res://main.cs" id="1_gvyeu"]
-[ext_resource type="Script" path="res://assets/scripts/CameraNavigator.cs" id="2_b2ncq"]
+[ext_resource type="Script" path="res://assets/scripts/CameraMinecraftNavigator.cs" id="2_trrb6"]
+[ext_resource type="Script" path="res://assets/scripts/hex/HexGridView.cs" id="3_ogrjs"]
+[ext_resource type="Script" path="res://assets/scripts/fpsLabel.cs" id="4_tsggu"]
+[ext_resource type="ArrayMesh" uid="uid://dsuu2cdpm53w" path="res://assets/models/hex.obj" id="5_q554y"]
+[ext_resource type="Material" uid="uid://cs100olq3xok2" path="res://assets/materials/hex_material.tres" id="6_3nxwh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_eeyig"]
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("meshInstance")]
+[sub_resource type="Environment" id="Environment_0p08k"]
+background_color = Color(1, 1, 1, 1)
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 4.03
+fog_light_color = Color(0.654902, 0.552941, 0.607843, 1)
+volumetric_fog_density = 0.0
+volumetric_fog_length = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1kmuy"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("meshInstance", "GridView")]
 script = ExtResource("1_gvyeu")
-meshInstance = NodePath("MeshInstance3D")
+meshInstance = NodePath("GridView/Box")
+GridView = NodePath("GridView")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.524521, 0.851398, 0, -0.851398, 0.524521, 0, 9.83084, 5.68709)
-script = ExtResource("2_b2ncq")
+transform = Transform3D(1, 0, 0, 0, 0.524521, 0.851398, 0, -0.851398, 0.524521, 0, 9.831, 0)
+script = ExtResource("2_trrb6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.896486, 0.443071, 0, -0.443071, 0.896486, 0, 4.07386, 6.36484)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.911044, -0.34657, -0.223358, 0, -0.541723, 0.840557, -0.41231, -0.765784, -0.493533, -0.0779724, 4.59166, -1.44597)
+light_energy = 0.5
+
+[node name="GridView" type="Node3D" parent="." node_paths=PackedStringArray("Camera", "Marker")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("3_ogrjs")
+Camera = NodePath("../Camera3D")
+Marker = NodePath("Box")
+
+[node name="fpsLabel" type="Label" parent="GridView"]
+offset_right = 155.0
+offset_bottom = 38.0
+script = ExtResource("4_tsggu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GridView"]
+transform = Transform3D(1.09, 0, 0, 0, 1.09, 0, 0, 0, 1.09, 0, 4.75361, 2.62583)
+mesh = ExtResource("5_q554y")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = ExtResource("6_3nxwh")
+
+[node name="Box" type="MeshInstance3D" parent="GridView"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0334845, 0, 0)
 mesh = SubResource("BoxMesh_eeyig")
+skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0p08k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.87421, 0, 0)
+mesh = SubResource("SphereMesh_1kmuy")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4igh3jqcjp8s"]
+
+[ext_resource type="Script" path="res://assets/scripts/hex/HexGridView.cs" id="1_v6060"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_v6060")

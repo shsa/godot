@@ -6,6 +6,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\DroneLibrary\DroneLibrary.csproj" />
   </ItemGroup>
 </Project>
