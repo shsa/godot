@@ -1,12 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6fkrbqlsiujx"]
+[gd_scene load_steps=4 format=3 uid="uid://b6fkrbqlsiujx"]
 
 [ext_resource type="Script" path="res://scripts/main.cs" id="1_5v2g0"]
+[ext_resource type="Script" path="res://scripts/FreeLookCamera.cs" id="2_m4o8r"]
+
+[sub_resource type="Environment" id="Environment_jp0g2"]
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 4.17
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_5v2g0")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.79673, 0.604335, 0, -0.604335, 0.79673, 0, 1.81376, 1.28275)
+transform = Transform3D(1, 0, 0, 0, 0.79673, 0.604335, 0, -0.604335, 0.79673, 0, 2.35163, 1.70546)
+script = ExtResource("2_m4o8r")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.854993, 0.518639, 0, -0.518639, 0.854993, 2.15114, 1.25918, 0.0961671)
+transform = Transform3D(1, 0, 0, 0, 0.510603, 0.859817, 0, -0.859817, 0.510603, 0.0787034, 1.74054, 0.0961671)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0978957, 0.560159, -0.82258, 0, 0.82655, 0.562863, 0.995197, -0.0551018, 0.0809157, -3.50414, 1.74054, 0.0961671)
+light_energy = 0.5
+sky_mode = 1
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.933287, 0.0843704, 0.34908, 0.242667, 0.864693, 0.439794, -0.264742, 0.495164, -0.827481, 3.76838, 1.74054, -2.6979)
+light_energy = 0.5
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jp0g2")
