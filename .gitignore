@@ -8,3 +8,8 @@
 /DroneLibrary/obj/Debug/net6.0
 /DroneLibrary/obj
 .vs/
+
+*.apk
+*.idsig
+*.user
+*.blend1
